@@ -85,8 +85,11 @@ class TransformaProspectivo:
        with open(self.caminhoDeckBase+"/vazpast.dat", "r") as file:
                 for line in file:
                     if("ANOPLAN" in line):
-                        self.valores = line.split("=")
-                        print(self.valores)
+                        print(line)
+                        line = line.replace(str(dados_Dger_base.ano_inicio_estudo), str(self.ano_inicio))
+                        #self.valores = line.split("=")
+                        #print(self.valores)
+                        print(line)
                         exit(1)
 
     def transformaSistema(self): ## ESTA FALTANDO O POS, NA INEWAVE QUANDO COLOCA O POS ESTÁ VAZIO, VER ISSO COM ROGERINHO
