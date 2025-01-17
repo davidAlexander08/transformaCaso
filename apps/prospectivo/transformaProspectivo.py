@@ -41,7 +41,6 @@ class TransformaProspectivo:
 
     def transformaAgrint(self):
         dados_Agrint = Agrint.read(self.caminhoDeckResultante+"/agrint.dat")
-
         print(dados_Agrint.limites_agrupamentos)
 
 
