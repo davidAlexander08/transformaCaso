@@ -51,7 +51,8 @@ class TransformaProspectivo:
     def transformaCadic(self):
         dados = Cadic.read(self.caminhoDeckResultante+"/c_adic.dat")
         print(dados.cargas)
-        
+        df_temp = dados.cargas.loc[(dados.cargas["data"] <  pd.to_datetime("9990-01-01"))]
+        print(df_temp)
 
 
         #conteudo_dger = StringIO()
