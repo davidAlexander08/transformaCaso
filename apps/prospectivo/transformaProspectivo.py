@@ -53,11 +53,11 @@ class TransformaProspectivo:
         self.transformaCasoDat()
         self.transformaClast()
 
-        
+
 
     def transformaClast(self):
         dados = Clast.read(self.caminhoDeckBase+"/clast.dat")
-        print(dados.modificacoes)
+        #print(dados.modificacoes)
 
     def transformaCasoDat(self):
         dados = Caso.read(self.caminhoDeckBase+"/caso.dat")
