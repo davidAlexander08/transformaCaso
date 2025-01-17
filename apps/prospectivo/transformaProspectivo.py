@@ -37,8 +37,10 @@ class TransformaProspectivo:
                     if("ANOINICIO" in line):
                         self.ano_inicio = line.split("=")[1]
         dados_Dger = Dger.read(self.caminhoDeckResultante+"/dger.dat")        
-        self.timeTableInicioEstudo =  pd.to_datetime(self.ano_inicio+"-"+str(dados_Dger.mes_inicio_estudo)+"-01")
-        print(self.timeTableInicioEstudo)
+        self.timeTableInicioEstudoProspectivo =  pd.to_datetime(self.ano_inicio+"-"+str(dados_Dger.mes_inicio_estudo)+"-01")
+        self.timeTableInicioEstudoAtual =  pd.to_datetime(dados_Dger.ano_inicio_estudo+"-"+str(dados_Dger.mes_inicio_estudo)+"-01")
+        print(self.timeTableInicioEstudoProspectivo)
+        print(self.timeTableInicioEstudoAtual)
         self.transformaDger()
         #self.transformaAgrint()
         self.transformaCadic()
