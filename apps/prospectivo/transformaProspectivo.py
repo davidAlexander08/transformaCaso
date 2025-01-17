@@ -85,7 +85,7 @@ class TransformaProspectivo:
 
 
     def transformaVolumesReferencia(self): 
-        df = pd.read_csv(self.caminhoDeckBase+"/volumes-referencia.csv", delimiter=';', parse_dates=[2, 3])  # Adjust column indices for dates
+        df = pd.read_csv(self.caminhoDeckBase+"/volumes-referencia.csv", delimiter=';')
         print(df)
         exit(1)
 
