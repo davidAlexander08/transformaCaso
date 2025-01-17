@@ -66,6 +66,9 @@ class TransformaProspectivo:
     def transformaExpt(self):
         dados = Expt.read(self.caminhoDeckBase+"/expt.dat")
         print(dados.expansoes)
+        dados.expansoes["data_inicio"] = dados.expansoes["data_inicio"] + self.delta
+        dados.expansoes["data_fim"] = dados.expansoes["data_fim"] + self.delta
+        print(dados.expansoes)
         #dados.expansoes["data_inicio_enchimento"] = dados.expansoes["data_inicio_enchimento"] + self.delta
         #dados.expansoes["data_entrada_operacao"] = dados.expansoes["data_entrada_operacao"] + self.delta
         #conteudo = StringIO()
