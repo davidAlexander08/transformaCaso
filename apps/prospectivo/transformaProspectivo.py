@@ -8,6 +8,8 @@ from apps.utils.log import Log
 import os.path
 from inewave.newave import Dger
 import shutil
+from io import StringIO
+
 class TransformaProspectivo:
     """
     Calcula os indicadores que são utilizados nas visualizações e comparações
@@ -55,11 +57,8 @@ class TransformaProspectivo:
         dados_Dger.alocacao_memoria_cortes = 0
         dados_Dger.alocacao_memoria_cortes
 
-        print(dados_Dger.utiliza_gerenciamento_pls)
-        print(dados_Dger.comunicacao_dois_niveis)
-        print(dados_Dger.armazenamento_local_arquivos_temporarios)
-        print(dados_Dger.alocacao_memoria_ena)
-        print(dados_Dger.alocacao_memoria_cortes)
 
-
+        conteudo_dger = StringIO()
+        dados_Dger.write(conteudo_dger)
+        print(conteudo_dger.getvalue())
         #dados_Dger.ano_inicio_estudo
