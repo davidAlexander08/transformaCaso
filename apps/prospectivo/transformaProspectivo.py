@@ -90,6 +90,8 @@ class TransformaProspectivo:
         CadHVolRefPer = pd.read_csv(self.caminhoDeckBase+"/volumes-referencia.csv", delimiter=';', skiprows=1, header=None, parse_dates=[2, 3])
         CadHVolRefPer[2] = CadHVolRefPer[2] +self.delta
         CadHVolRefPer[3] = CadHVolRefPer[3] +self.delta
+        CadHVolRefPer[2] = pd.to_datetime(CadHVolRefPer[2]).dt.strftime('%Y/%m')
+        CadHVolRefPer[3] = pd.to_datetime(CadHVolRefPer[3]).dt.strftime('%Y/%m')
         print(CadHVolRefPer)
 
         VolumeReferencialTipoPadrao.to_csv(self.caminhoDeckResultante+'/volumes-referencia_teste.csv', index=False, header=False)
