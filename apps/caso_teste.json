@@ -1,0 +1,18 @@
+
+
+{
+    "casos": [
+        {
+            "nome": "ree_25x35",
+            "caminho": "ree_25x35_vutil",
+            "cor": "rgba(0, 0, 0, 1.00)",
+            "marcador": "square"
+        }
+    ],
+	"usinas":[
+		{"nome":"FURNAS", "periodo": [2,3,4]},
+		{"nome":"MARIMBONDO", "periodo":[2]}
+	]
+}
+
+
