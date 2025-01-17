@@ -66,7 +66,7 @@ class TransformaProspectivo:
         self.transformaGhmin()
 
     def transformaGhmin(self):
-        dados = Expt.read(self.caminhoDeckBase+"/ghmin.dat")
+        dados = Ghmin.read(self.caminhoDeckBase+"/ghmin.dat")
         print(dados.geracoes)
         #dados.expansoes["data_inicio"] = dados.expansoes["data_inicio"] + self.delta
         #dados.expansoes["data_fim"] = dados.expansoes["data_fim"] + self.delta
