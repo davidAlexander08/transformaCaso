@@ -81,18 +81,24 @@ class TransformaProspectivo:
         #self.transformaRestricoes()
         
 
-    def transformaVazpast(self): ## ESTA FALTANDO O POS, NA INEWAVE QUANDO COLOCA O POS ESTÁ VAZIO, VER ISSO COM ROGERINHO
-       with open(self.caminhoDeckBase+"/vazpast.dat", "r") as file:
-                for line in file:
-                    if("ANOPLAN" in line):
-                        print(line)
-                        line = line.replace(str(self.dados_Dger_base.ano_inicio_estudo), str(self.ano_inicio))
-                        #self.valores = line.split("=")
-                        #print(self.valores)
-                        print(line)
-                        exit(1)
+    def transformaVazpast(self): 
+        with open(self.caminhoDeckBase+"/vazpast.dat", "r") as file:
+            lines = file.readlines()  # Read all lines into a list
 
-    def transformaSistema(self): ## ESTA FALTANDO O POS, NA INEWAVE QUANDO COLOCA O POS ESTÁ VAZIO, VER ISSO COM ROGERINHO
+        for i, line in enumerate(lines):
+            if "ANOPLAN" in line:
+                print(f"Before modification: {line.strip()}")
+                # Replace the year as per your logic
+                modified_line = line.replace(str(self.dados_Dger_base.ano_inicio_estudo), str(self.ano_inicio))
+                lines[i] = modified_line  # Update the line in the list
+                print(f"After modification: {modified_line.strip()}")
+                break  # Assuming you only want to modify the first matching line
+
+        # Write the modified content back to the file
+        with open(self.caminhoDeckBase+"/vazpast.dat", "w") as file:
+            file.writelines(lines)  # Write all lines (modified and unmodified) back to the file
+
+    def transformaSistema(self): 
         dados = Sistema.read(self.caminhoDeckBase+"/sistema.dat")
         dados.limites_intercambio["data"] = dados.limites_intercambio["data"] +self.delta + timedelta(days=1)
         df_temp = dados.mercado_energia.loc[(dados.mercado_energia["data"] <  datetime(9990, 1, 1))]
@@ -105,7 +111,7 @@ class TransformaProspectivo:
             file.write(conteudo.getvalue())
 
 
-    #def transformaRestricoes(self): ## ESTA FALTANDO O POS, NA INEWAVE QUANDO COLOCA O POS ESTÁ VAZIO, VER ISSO COM ROGERINHO
+    #def transformaRestricoes(self):
     #    dados = Restricoes.read(self.caminhoDeckBase+"/restricao-eletrica.csv")
     #    print(dados.re_horiz_per(df = True))
     #    print(dados.re_lim_form_per(df = True))
@@ -124,7 +130,7 @@ class TransformaProspectivo:
         #with open(self.caminhoDeckResultante+"/"+"ree.dat", "w") as file:
         #    file.write(conteudo.getvalue())
 
-    def transformaRee(self): ## ESTA FALTANDO O POS, NA INEWAVE QUANDO COLOCA O POS ESTÁ VAZIO, VER ISSO COM ROGERINHO
+    def transformaRee(self): 
         dados = Ree.read(self.caminhoDeckBase+"/ree.dat")
         dados.rees["ano_fim_individualizado"] = dados.rees["ano_fim_individualizado"] + self.delta.days / 365
         conteudo = StringIO()
@@ -132,7 +138,7 @@ class TransformaProspectivo:
         with open(self.caminhoDeckResultante+"/"+"ree.dat", "w") as file:
             file.write(conteudo.getvalue())
 
-    def transformaPatamar(self): ## ESTA FALTANDO O POS, NA INEWAVE QUANDO COLOCA O POS ESTÁ VAZIO, VER ISSO COM ROGERINHO
+    def transformaPatamar(self): 
         dados = Patamar.read(self.caminhoDeckBase+"/patamar.dat")
         dados.duracao_mensal_patamares["data"]   = dados.duracao_mensal_patamares["data"]  +self.delta
         dados.carga_patamares["data"] = dados.carga_patamares["data"] + self.delta
@@ -143,7 +149,7 @@ class TransformaProspectivo:
         with open(self.caminhoDeckResultante+"/"+"patamar.dat", "w") as file:
             file.write(conteudo.getvalue())
 
-    def transformaManutt(self): ## ESTA FALTANDO O POS, NA INEWAVE QUANDO COLOCA O POS ESTÁ VAZIO, VER ISSO COM ROGERINHO
+    def transformaManutt(self): 
         dados = Manutt.read(self.caminhoDeckBase+"/manutt.dat")
         dados.manutencoes["data_inicio"] = dados.manutencoes["data_inicio"] + self.delta
         conteudo = StringIO()
