@@ -55,7 +55,7 @@ class TransformaProspectivo:
         print("ano_alto: ", ano_alto)
         df_temp = dados.cargas.loc[(dados.cargas["data"] <  ano_alto)]
         print(df_temp)
-        df_temp["data"] = df_temp["data"] + self.delta + 1
+        df_temp["data"] = df_temp["data"] + self.delta + timedelta(days=1)
         print(df_temp)
 
 
