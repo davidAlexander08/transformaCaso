@@ -95,7 +95,7 @@ class TransformaProspectivo:
                 break  # Assuming you only want to modify the first matching line
 
         # Write the modified content back to the file
-        with open(self.caminhoDeckBase+"/vazpast.dat", "w") as file:
+        with open(self.caminhoDeckResultante+"/vazpast.dat", "w") as file:
             file.writelines(lines)  # Write all lines (modified and unmodified) back to the file
 
     def transformaSistema(self): 
