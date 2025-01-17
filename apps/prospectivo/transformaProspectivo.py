@@ -65,6 +65,12 @@ class TransformaProspectivo:
         #with open(self.caminhoDeckResultante+"/"+"dger.dat", "w") as file:
         #    file.write(conteudo_dger.getvalue())
         ##dados_Dger.ano_inicio_estudo
+        conteudo = StringIO()
+        dados.write(conteudo)
+        print(conteudo.getvalue())
+        #with open(self.caminhoDeckResultante+"/"+"c_adic.dat", "w") as file:
+        #    file.write(conteudo.getvalue())
+        #dados_Dger.ano_inicio_estudo
 
 
     def transformaAgrint(self):
