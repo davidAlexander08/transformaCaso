@@ -92,8 +92,8 @@ class TransformaProspectivo:
         CadHVolRefPer[3] = CadHVolRefPer[3] +self.delta
         print(CadHVolRefPer)
 
-        VolumeReferencialTipoPadrao.to_csv('volumes-referencia_teste.csv', index=False, header=False)
-        CadHVolRefPer.to_csv('volumes-referencia_teste.csv', mode='a', index=False, header=False)
+        VolumeReferencialTipoPadrao.to_csv(self.caminhoDeckResultante+'/volumes-referencia_teste.csv', index=False, header=False)
+        CadHVolRefPer.to_csv(self.caminhoDeckResultante+'/volumes-referencia_teste.csv', mode='a', index=False, header=False)
         exit(1)
 
 
