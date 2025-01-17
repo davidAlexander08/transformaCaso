@@ -86,7 +86,6 @@ class TransformaProspectivo:
         print(dados.geracao_usinas_nao_simuladas)
 
         dados.limites_intercambio["data"] = dados.limites_intercambio["data"] +self.delta
-        dados.mercado_energia["data"] = dados.mercado_energia["data"] +self.delta 
         df_temp = dados.mercado_energia.loc[(dados.mercado_energia["data"] <  datetime(9990, 1, 1))]
         df_temp["data"] = df_temp["data"] + self.delta 
         dados.mercado_energia.loc[(dados.mercado_energia["data"] <  datetime(9990, 1, 1))] = df_temp
