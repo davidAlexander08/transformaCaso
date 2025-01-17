@@ -37,6 +37,8 @@ class TransformaProspectivo:
                 for line in file:
                     if("ANOINICIO" in line):
                         self.ano_inicio = line.split("=")[1]
+                    if("VERSAO" in line):
+                        self.versao = line.split("=")[1]
         dados_Dger_base = Dger.read(self.caminhoDeckBase+"/dger.dat")        
         self.timeTableInicioEstudoProspectivo =  pd.to_datetime(self.ano_inicio+"-"+str(dados_Dger_base.mes_inicio_estudo)+"-01")
         self.timeTableInicioEstudoBase =  pd.to_datetime(str(dados_Dger_base.ano_inicio_estudo)+"-"+str(dados_Dger_base.mes_inicio_estudo)+"-01")
@@ -51,6 +53,12 @@ class TransformaProspectivo:
 
     def transformaCasoDat(self):
         dados = Caso.read(self.caminhoDeckBase+"/caso.dat")
+        dados.gerenciador_processos = "/home/pem/versoes/NEWAVE/v"+self.versao+"/"
+        dados.gerenciador_processos
+        conteudo = StringIO()
+        dados.write(conteudo)
+        with open(self.caminhoDeckResultante+"/"+"caso.dat", "w") as file:
+            file.write(conteudo.getvalue())
 
         print(dados.gerenciador_processos)
 
