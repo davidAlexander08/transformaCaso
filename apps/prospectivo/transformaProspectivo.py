@@ -77,6 +77,14 @@ class TransformaProspectivo:
         print(dados.carga_patamares)
         print(dados.intercambio_patamares)
         print(dados.usinas_nao_simuladas)
+        dados.duracao_mensal_patamares["data"]   = dados.duracao_mensal_patamares["data"]  +self.delta
+        dados.carga_patamares["data"] = dados.carga_patamares["data"] + self.delta
+        dados.intercambio_patamares["data"] = dados.intercambio_patamares["data"] + self.delta
+        dados.usinas_nao_simuladas["data"] = dados.usinas_nao_simuladas["data"] + self.delta
+        print(dados.duracao_mensal_patamares)
+        print(dados.carga_patamares)
+        print(dados.intercambio_patamares)
+        print(dados.usinas_nao_simuladas)
         #dados.manutencoes["data_inicio"] = dados.manutencoes["data_inicio"] + self.delta
         #conteudo = StringIO()
         #dados.write(conteudo)
