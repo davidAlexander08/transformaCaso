@@ -16,6 +16,7 @@ from inewave.newave import Cvar
 from inewave.newave import Dsvagua
 from inewave.newave import Exph
 from inewave.newave import Expt
+from inewave.newave import Ghmin
 import shutil
 from io import StringIO
 
@@ -62,6 +63,17 @@ class TransformaProspectivo:
         #self.transformaDsvagua()
         self.transformaExph()
         self.transformaExpt()
+        self.transformaGhmin()
+
+    def transformaGhmin(self):
+        dados = Expt.read(self.caminhoDeckBase+"/ghmin.dat")
+        print(dados.geracoes)
+        #dados.expansoes["data_inicio"] = dados.expansoes["data_inicio"] + self.delta
+        #dados.expansoes["data_fim"] = dados.expansoes["data_fim"] + self.delta
+        #conteudo = StringIO()
+        #dados.write(conteudo)
+        #with open(self.caminhoDeckResultante+"/"+"expt.dat", "w") as file:
+        #    file.write(conteudo.getvalue())
 
     def transformaExpt(self):
         dados = Expt.read(self.caminhoDeckBase+"/expt.dat")
