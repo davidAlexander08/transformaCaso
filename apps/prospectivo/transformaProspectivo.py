@@ -54,7 +54,6 @@ class TransformaProspectivo:
     def transformaCasoDat(self):
         dados = Caso.read(self.caminhoDeckBase+"/caso.dat")
         dados.gerenciador_processos = "/home/pem/versoes/NEWAVE/v"+self.versao+"/"
-        dados.gerenciador_processos
         conteudo = StringIO()
         dados.write(conteudo)
         with open(self.caminhoDeckResultante+"/"+"caso.dat", "w") as file:
