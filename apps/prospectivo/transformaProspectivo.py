@@ -73,23 +73,14 @@ class TransformaProspectivo:
 
     def transformaPatamar(self): ## ESTA FALTANDO O POS, NA INEWAVE QUANDO COLOCA O POS ESTÁ VAZIO, VER ISSO COM ROGERINHO
         dados = Patamar.read(self.caminhoDeckBase+"/patamar.dat")
-        print(dados.duracao_mensal_patamares)
-        print(dados.carga_patamares)
-        print(dados.intercambio_patamares)
-        print(dados.usinas_nao_simuladas)
         dados.duracao_mensal_patamares["data"]   = dados.duracao_mensal_patamares["data"]  +self.delta
         dados.carga_patamares["data"] = dados.carga_patamares["data"] + self.delta
         dados.intercambio_patamares["data"] = dados.intercambio_patamares["data"] + self.delta
         dados.usinas_nao_simuladas["data"] = dados.usinas_nao_simuladas["data"] + self.delta
-        print(dados.duracao_mensal_patamares)
-        print(dados.carga_patamares)
-        print(dados.intercambio_patamares)
-        print(dados.usinas_nao_simuladas)
-        #dados.manutencoes["data_inicio"] = dados.manutencoes["data_inicio"] + self.delta
-        #conteudo = StringIO()
-        #dados.write(conteudo)
-        #with open(self.caminhoDeckResultante+"/"+"patamar.dat", "w") as file:
-        #    file.write(conteudo.getvalue())
+        conteudo = StringIO()
+        dados.write(conteudo)
+        with open(self.caminhoDeckResultante+"/"+"patamar.dat", "w") as file:
+            file.write(conteudo.getvalue())
 
     def transformaManutt(self): ## ESTA FALTANDO O POS, NA INEWAVE QUANDO COLOCA O POS ESTÁ VAZIO, VER ISSO COM ROGERINHO
         dados = Manutt.read(self.caminhoDeckBase+"/manutt.dat")
