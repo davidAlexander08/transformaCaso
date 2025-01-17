@@ -15,6 +15,7 @@ from inewave.newave import Curva
 from inewave.newave import Cvar
 from inewave.newave import Dsvagua
 from inewave.newave import Exph
+from inewave.newave import Expt
 import shutil
 from io import StringIO
 
@@ -60,6 +61,17 @@ class TransformaProspectivo:
         self.transformaCVAR()
         #self.transformaDsvagua()
         self.transformaExph()
+        self.transformaExpt()
+
+    def transformaExpt(self):
+        dados = Expt.read(self.caminhoDeckBase+"/expt.dat")
+        print(dados.expansoes)
+        #dados.expansoes["data_inicio_enchimento"] = dados.expansoes["data_inicio_enchimento"] + self.delta
+        #dados.expansoes["data_entrada_operacao"] = dados.expansoes["data_entrada_operacao"] + self.delta
+        #conteudo = StringIO()
+        #dados.write(conteudo)
+        #with open(self.caminhoDeckResultante+"/"+"exph.dat", "w") as file:
+        #    file.write(conteudo.getvalue())
 
     def transformaExph(self):
         dados = Exph.read(self.caminhoDeckBase+"/exph.dat")
