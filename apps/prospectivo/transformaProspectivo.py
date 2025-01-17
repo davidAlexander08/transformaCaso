@@ -53,9 +53,9 @@ class TransformaProspectivo:
                         self.ano_inicio = line.split("=")[1]
                     if("VERSAO" in line):
                         self.versao = line.split("=")[1]
-        dados_Dger_base = Dger.read(self.caminhoDeckBase+"/dger.dat")        
-        self.timeTableInicioEstudoProspectivo =  pd.to_datetime(self.ano_inicio+"-"+str(dados_Dger_base.mes_inicio_estudo)+"-01")
-        self.timeTableInicioEstudoBase =  pd.to_datetime(str(dados_Dger_base.ano_inicio_estudo)+"-"+str(dados_Dger_base.mes_inicio_estudo)+"-01")
+        self.dados_Dger_base = Dger.read(self.caminhoDeckBase+"/dger.dat")        
+        self.timeTableInicioEstudoProspectivo =  pd.to_datetime(self.ano_inicio+"-"+str(self.dados_Dger_base.mes_inicio_estudo)+"-01")
+        self.timeTableInicioEstudoBase =  pd.to_datetime(str(self.dados_Dger_base.ano_inicio_estudo)+"-"+str(self.dados_Dger_base.mes_inicio_estudo)+"-01")
         self.delta = self.timeTableInicioEstudoProspectivo - self.timeTableInicioEstudoBase
         print(self.delta)
         print(self.timeTableInicioEstudoProspectivo)
@@ -86,7 +86,7 @@ class TransformaProspectivo:
                 for line in file:
                     if("ANOPLAN" in line):
                         print(line)
-                        line = line.replace(str(dados_Dger_base.ano_inicio_estudo), str(self.ano_inicio))
+                        line = line.replace(str(self.dados_Dger_base.ano_inicio_estudo), str(self.ano_inicio))
                         #self.valores = line.split("=")
                         #print(self.valores)
                         print(line)
