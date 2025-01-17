@@ -52,7 +52,7 @@ class TransformaProspectivo:
         dados = Cadic.read(self.caminhoDeckResultante+"/c_adic.dat")
         df_temp = dados.cargas.loc[(dados.cargas["data"] <  datetime(9990, 1, 1))]
         df_temp["data"] = df_temp["data"] + self.delta + timedelta(days=1)
-        dados.cargas.loc[(dados.cargas["data"] <  ano_alto)] = df_temp
+        dados.cargas.loc[(dados.cargas["data"] <  datetime(9990, 1, 1))] = df_temp
         conteudo = StringIO()
         dados.write(conteudo)
         with open(self.caminhoDeckResultante+"/"+"c_adic.dat", "w") as file:
