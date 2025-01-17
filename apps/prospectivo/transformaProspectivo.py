@@ -88,8 +88,8 @@ class TransformaProspectivo:
         VolumeReferencialTipoPadrao = pd.read_csv(self.caminhoDeckBase + "/volumes-referencia.csv", delimiter=';', nrows=1, header=None)
         print(VolumeReferencialTipoPadrao)
         CadHVolRefPer = pd.read_csv(self.caminhoDeckBase+"/volumes-referencia.csv", delimiter=';', skiprows=1, header=None, parse_dates=[2, 3])
-        CadHVolRefPer["2"] = CadHVolRefPer["2"] +self.delta
-        CadHVolRefPer["3"] = CadHVolRefPer["3"] +self.delta
+        CadHVolRefPer[2] = CadHVolRefPer[2] +self.delta
+        CadHVolRefPer[3] = CadHVolRefPer[3] +self.delta
         print(CadHVolRefPer)
         exit(1)
 
