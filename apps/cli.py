@@ -26,6 +26,7 @@ def prospectivo(arquivo_txt):
                 caminho = line.split('"')[1]
                 if os.path.isdir(caminho):
                     print("Pasta: ", caminho, " Existe, Prosseguindo")
+                    flag_prossegue = 1
                 else:
                     print("ERRO: Pasta: ", caminho, " Não Existe")
                     exit(1)
