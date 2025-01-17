@@ -58,6 +58,7 @@ class TransformaProspectivo:
     def transformaClast(self):
         dados = Clast.read(self.caminhoDeckBase+"/clast.dat")
         dados.modificacoes["data_inicio"] = dados.modificacoes["data_inicio"] + self.delta
+        dados.modificacoes["data_fim"] = dados.modificacoes["data_fim"] + self.delta
         print(dados.modificacoes)
 
     def transformaCasoDat(self):
