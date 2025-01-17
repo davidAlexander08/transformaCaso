@@ -17,6 +17,7 @@ from inewave.newave import Dsvagua
 from inewave.newave import Exph
 from inewave.newave import Expt
 from inewave.newave import Ghmin
+from inewave.newave import Manutt
 import shutil
 from io import StringIO
 
@@ -64,8 +65,20 @@ class TransformaProspectivo:
         self.transformaExph()
         self.transformaExpt()
         self.transformaGhmin()
+        self.transformaManutt()
 
-    def transformaGhmin(self):
+
+    def transformaManutt(self): ## ESTA FALTANDO O POS, NA INEWAVE QUANDO COLOCA O POS ESTÁ VAZIO, VER ISSO COM ROGERINHO
+        dados = Manutt.read(self.caminhoDeckBase+"/manutt.dat")
+        print(dados.manutencoes)
+        #dados.geracoes["data"] = dados.geracoes["data"] + self.delta
+        #conteudo = StringIO()
+        #dados.write(conteudo)
+        #with open(self.caminhoDeckResultante+"/"+"ghmin.dat", "w") as file:
+        #    file.write(conteudo.getvalue())
+
+    
+    def transformaGhmin(self): ## ESTA FALTANDO O POS, NA INEWAVE QUANDO COLOCA O POS ESTÁ VAZIO, VER ISSO COM ROGERINHO
         dados = Ghmin.read(self.caminhoDeckBase+"/ghmin.dat")
         dados.geracoes["data"] = dados.geracoes["data"] + self.delta
         conteudo = StringIO()
