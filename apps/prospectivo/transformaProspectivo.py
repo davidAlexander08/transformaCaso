@@ -63,15 +63,12 @@ class TransformaProspectivo:
 
     def transformaExph(self):
         dados = Exph.read(self.caminhoDeckBase+"/exph.dat")
-        print(dados.expansoes)
         dados.expansoes["data_inicio_enchimento"] = dados.expansoes["data_inicio_enchimento"] + self.delta
         dados.expansoes["data_entrada_operacao"] = dados.expansoes["data_entrada_operacao"] + self.delta
-        print(dados.expansoes)
-        #dados.curva_seguranca["data"] = dados.curva_seguranca["data"] + self.delta+ timedelta(days=1)
-        #conteudo = StringIO()
-        #dados.write(conteudo)
-        #with open(self.caminhoDeckResultante+"/"+"curva.dat", "w") as file:
-        #    file.write(conteudo.getvalue())
+        conteudo = StringIO()
+        dados.write(conteudo)
+        with open(self.caminhoDeckResultante+"/"+"exph.dat", "w") as file:
+            file.write(conteudo.getvalue())
 
     #def transformaDsvagua(self):
     #    dados = Dsvagua.read(self.caminhoDeckBase+"/dsvagua.dat")
