@@ -7,6 +7,7 @@ import pandas as pd
 from apps.utils.log import Log
 import os.path
 from inewave.newave import Dger
+from inewave.newave import Agrint
 import shutil
 from io import StringIO
 
@@ -36,6 +37,19 @@ class TransformaProspectivo:
                         self.ano_inicio = line.split("=")[1]
 
         self.transformaDger()
+        self.transformaAgrint()
+
+    def transformaAgrint(self):
+        dados_Agrint = Agrint.read(self.caminhoDeckResultante+"/agrint.dat")
+
+        print(dados_Agrint.limites_agrupamentos)
+
+
+        #conteudo_dger = StringIO()
+        #dados_Dger.write(conteudo_dger)
+        #with open(self.caminhoDeckResultante+"/"+"dger.dat", "w") as file:
+        #    file.write(conteudo_dger.getvalue())
+        ##dados_Dger.ano_inicio_estudo
 
 
     def transformaDger(self):
