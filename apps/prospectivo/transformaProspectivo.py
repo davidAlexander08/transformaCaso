@@ -50,9 +50,9 @@ class TransformaProspectivo:
         dados_Dger.comunicacao_dois_niveis
         dados_Dger.armazenamento_local_arquivos_temporarios = 1
         dados_Dger.armazenamento_local_arquivos_temporarios
-        dados_Dger.alocacao_memoria_ena = 1
+        dados_Dger.alocacao_memoria_ena = 0
         dados_Dger.alocacao_memoria_ena
-        dados_Dger.alocacao_memoria_cortes = 1 
+        dados_Dger.alocacao_memoria_cortes = 0
         dados_Dger.alocacao_memoria_cortes
 
         print(dados_Dger.utiliza_gerenciamento_pls)
