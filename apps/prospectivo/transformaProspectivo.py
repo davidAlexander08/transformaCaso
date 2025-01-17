@@ -67,6 +67,7 @@ class TransformaProspectivo:
         self.transformaCasoDat()
         self.transformaClast()
         self.transformaCurva()
+        self.transformaVolumesReferencia()
         self.transformaCVAR()
         self.transformaRee()
         self.transformaVazpast()
@@ -80,6 +81,13 @@ class TransformaProspectivo:
         self.transformaPatamar()
         #self.transformaRestricoes()
         
+        
+
+
+    def transformaVolumesReferencia(self): 
+        df = pd.read_csv(file_path, delimiter=';', parse_dates=[2, 3])  # Adjust column indices for dates
+        print(df)
+        exit(1)
 
     def transformaVazpast(self): 
         with open(self.caminhoDeckBase+"/vazpast.dat", "r") as file:
@@ -87,11 +95,8 @@ class TransformaProspectivo:
 
         for i, line in enumerate(lines):
             if "ANOPLAN" in line:
-                print(f"Before modification: {line.strip()}")
-                # Replace the year as per your logic
                 modified_line = line.replace(str(self.dados_Dger_base.ano_inicio_estudo), str(self.ano_inicio))
                 lines[i] = modified_line  # Update the line in the list
-                print(f"After modification: {modified_line.strip()}")
                 break  # Assuming you only want to modify the first matching line
 
         # Write the modified content back to the file
