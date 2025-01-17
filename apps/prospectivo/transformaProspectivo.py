@@ -21,6 +21,7 @@ from inewave.newave import Manutt
 from inewave.newave import Modif
 from inewave.newave import Patamar
 from inewave.newave import Ree
+from inewave.newave import Sistema
 from inewave.libs import Restricoes
 import shutil
 from io import StringIO
@@ -60,13 +61,14 @@ class TransformaProspectivo:
         print(self.timeTableInicioEstudoBase)
         self.transformaDger()
         #self.transformaAgrint()
-        self.transformaRestricoes()
+        
         self.transformaCadic()
         self.transformaCasoDat()
         self.transformaClast()
         self.transformaCurva()
         self.transformaCVAR()
         self.transformaRee()
+        self.transformaSistema()
         #self.transformaDsvagua()
         self.transformaExph()
         self.transformaExpt()
@@ -74,18 +76,33 @@ class TransformaProspectivo:
         self.transformaManutt()
         #self.transformaModif()
         self.transformaPatamar()
+        #self.transformaRestricoes()
         
-        
-    def transformaRestricoes(self): ## ESTA FALTANDO O POS, NA INEWAVE QUANDO COLOCA O POS ESTÁ VAZIO, VER ISSO COM ROGERINHO
-        dados = Restricoes.read(self.caminhoDeckBase+"/restricao-eletrica.csv")
-        print(dados.re_horiz_per(df = True))
-        print(dados.re_lim_form_per(df = True))
-        dados.re_horiz_per(df = True)["data_inicio"] = dados.re_horiz_per(df = True)["data_inicio"] + self.delta
-        dados.re_lim_form_per(df = True)["data_inicio"] = dados.re_lim_form_per(df = True)["data_inicio"] + self.delta
-        dados.re_horiz_per(df = True)["data_fim"] = dados.re_horiz_per(df = True)["data_fim"] + self.delta
-        dados.re_lim_form_per(df = True)["data_fim"] = dados.re_lim_form_per(df = True)["data_fim"] + self.delta
-        print(dados.re_horiz_per(df = True))
-        print(dados.re_lim_form_per(df = True))
+
+    def transformaSistema(self): ## ESTA FALTANDO O POS, NA INEWAVE QUANDO COLOCA O POS ESTÁ VAZIO, VER ISSO COM ROGERINHO
+        dados = Sistema.read(self.caminhoDeckBase+"/sistema.dat")
+        print(dados.limites_intercambio)
+        print(dados.mercado_energia)
+        print(dados.geracao_usinas_nao_simuladas)
+
+        exit(1)
+        dados.rees["ano_fim_individualizado"] = dados.rees["ano_fim_individualizado"] + self.delta.days / 365
+        conteudo = StringIO()
+        dados.write(conteudo)
+        with open(self.caminhoDeckResultante+"/"+"ree.dat", "w") as file:
+            file.write(conteudo.getvalue())
+
+
+    #def transformaRestricoes(self): ## ESTA FALTANDO O POS, NA INEWAVE QUANDO COLOCA O POS ESTÁ VAZIO, VER ISSO COM ROGERINHO
+    #    dados = Restricoes.read(self.caminhoDeckBase+"/restricao-eletrica.csv")
+    #    print(dados.re_horiz_per(df = True))
+    #    print(dados.re_lim_form_per(df = True))
+    #    dados.re_horiz_per(df = True)["data_inicio"] = dados.re_horiz_per(df = True)["data_inicio"] + self.delta
+    #    dados.re_lim_form_per(df = True)["data_inicio"] = dados.re_lim_form_per(df = True)["data_inicio"] + self.delta
+    #    dados.re_horiz_per(df = True)["data_fim"] = dados.re_horiz_per(df = True)["data_fim"] + self.delta
+    #    dados.re_lim_form_per(df = True)["data_fim"] = dados.re_lim_form_per(df = True)["data_fim"] + self.delta
+    #    print(dados.re_horiz_per(df = True))
+    #    print(dados.re_lim_form_per(df = True))
         
         
 
