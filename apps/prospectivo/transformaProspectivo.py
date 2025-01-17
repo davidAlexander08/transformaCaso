@@ -57,8 +57,9 @@ class TransformaProspectivo:
         print(df_temp)
         df_temp["data"] = df_temp["data"] + self.delta + timedelta(days=1)
         print(df_temp)
+        dados.cargas.loc[(dados.cargas["data"] <  ano_alto)] = df_temp
 
-
+        print(dados.cargas)
         #conteudo_dger = StringIO()
         #dados_Dger.write(conteudo_dger)
         #with open(self.caminhoDeckResultante+"/"+"dger.dat", "w") as file:
