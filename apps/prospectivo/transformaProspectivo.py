@@ -39,9 +39,16 @@ class TransformaProspectivo:
     def transformaDger(self):
         dados_Dger = Dger.read(self.caminhoDeckResultante+"/dger.dat")
 
-
-        print(dados_Dger.ano_inicio_estudo)
+        #Altera ano de início do estudo
         dados_Dger.ano_inicio_estudo = self.ano_inicio
         dados_Dger.ano_inicio_estudo
-        print(dados_Dger.ano_inicio_estudo)
 
+        #Altera gerenciador de PLs
+        print(dados_Dger.utiliza_gerenciamento_pls)
+        print(dados_Dger.comunicacao_dois_niveis)
+        print(dados_Dger.armazenamento_local_arquivos_temporarios)
+        print(dados_Dger.alocacao_memoria_ena)
+        print(dados_Dger.alocacao_memoria_cortes)
+
+
+        #dados_Dger.ano_inicio_estudo
