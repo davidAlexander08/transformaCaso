@@ -91,7 +91,12 @@ class TransformaProspectivo:
         CadHVolRefPer[2] = CadHVolRefPer[2] +self.delta
         CadHVolRefPer[3] = CadHVolRefPer[3] +self.delta
         print(CadHVolRefPer)
+
+        VolumeReferencialTipoPadrao.to_csv('volumes-referencia_teste.csv', index=False, header=False)
+        CadHVolRefPer.to_csv('volumes-referencia_teste.csv', mode='a', index=False, header=False)
         exit(1)
+
+
 
     def transformaVazpast(self): 
         with open(self.caminhoDeckBase+"/vazpast.dat", "r") as file:
