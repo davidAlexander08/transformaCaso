@@ -60,6 +60,6 @@ class TransformaProspectivo:
 
         conteudo_dger = StringIO()
         dados_Dger.write(conteudo_dger)
-        with open(self.caminhoDeckResultante/"dger.dat", "w") as file:
+        with open(self.caminhoDeckResultante+"/"+"dger.dat", "w") as file:
             file.write(conteudo_dger.getvalue())
         #dados_Dger.ano_inicio_estudo
