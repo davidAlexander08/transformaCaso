@@ -60,12 +60,22 @@ class TransformaProspectivo:
 
     def transformaCVAR(self):
         dados = Cvar.read(self.caminhoDeckBase+"/cvar.dat")
+
         print(dados.alfa_variavel)
+        df_temp = dados.alfa_variavel.loc[(dados.alfa_variavel["data"] <  datetime(9990, 1, 1))]
+        df_temp["data"] = df_temp["data"] + self.delta + timedelta(days=1)
+        dados.alfa_variavel.loc[(dados.alfa_variavel["data"] <  datetime(9990, 1, 1))] = df_temp
+        print(dados.alfa_variavel)
+
         print(dados.lambda_variavel)
-        #dados.curva_seguranca["data"] = dados.curva_seguranca["data"] + self.delta+ timedelta(days=1)
+        df_temp = dados.lambda_variavel.loc[(dados.lambda_variavel["data"] <  datetime(9990, 1, 1))]
+        df_temp["data"] = df_temp["data"] + self.delta + timedelta(days=1)
+        dados.lambda_variavel.loc[(dados.lambda_variavel["data"] <  datetime(9990, 1, 1))] = df_temp
+        print(dados.lambda_variavel)
+
         #conteudo = StringIO()
         #dados.write(conteudo)
-        #with open(self.caminhoDeckResultante+"/"+"curva.dat", "w") as file:
+        #with open(self.caminhoDeckResultante+"/"+"c_adic.dat", "w") as file:
         #    file.write(conteudo.getvalue())
 
     def transformaCurva(self):
