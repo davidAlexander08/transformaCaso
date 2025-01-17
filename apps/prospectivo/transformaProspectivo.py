@@ -64,6 +64,7 @@ class TransformaProspectivo:
         self.transformaClast()
         self.transformaCurva()
         self.transformaCVAR()
+        self.transformaRee()
         #self.transformaDsvagua()
         self.transformaExph()
         self.transformaExpt()
@@ -71,10 +72,12 @@ class TransformaProspectivo:
         self.transformaManutt()
         #self.transformaModif()
         self.transformaPatamar()
-        self.transformaRee()
+        
 
     def transformaRee(self): ## ESTA FALTANDO O POS, NA INEWAVE QUANDO COLOCA O POS ESTÁ VAZIO, VER ISSO COM ROGERINHO
         dados = Ree.read(self.caminhoDeckBase+"/ree.dat")
+        print(dados.rees)
+        dados.rees["ano_fim_individualizado"] = dados.rees["ano_fim_individualizado"] + 1
         print(dados.rees)
         #dados.duracao_mensal_patamares["data"]   = dados.duracao_mensal_patamares["data"]  +self.delta
         #dados.carga_patamares["data"] = dados.carga_patamares["data"] + self.delta
