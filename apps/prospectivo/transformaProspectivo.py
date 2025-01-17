@@ -50,27 +50,13 @@ class TransformaProspectivo:
 
     def transformaCadic(self):
         dados = Cadic.read(self.caminhoDeckResultante+"/c_adic.dat")
-        print(dados.cargas)
-        ano_alto = datetime(9990, 1, 1)
-        print("ano_alto: ", ano_alto)
-        df_temp = dados.cargas.loc[(dados.cargas["data"] <  ano_alto)]
-        print(df_temp)
+        df_temp = dados.cargas.loc[(dados.cargas["data"] <  datetime(9990, 1, 1))]
         df_temp["data"] = df_temp["data"] + self.delta + timedelta(days=1)
-        print(df_temp)
         dados.cargas.loc[(dados.cargas["data"] <  ano_alto)] = df_temp
-
-        print(dados.cargas)
-        #conteudo_dger = StringIO()
-        #dados_Dger.write(conteudo_dger)
-        #with open(self.caminhoDeckResultante+"/"+"dger.dat", "w") as file:
-        #    file.write(conteudo_dger.getvalue())
-        ##dados_Dger.ano_inicio_estudo
         conteudo = StringIO()
         dados.write(conteudo)
-        print(conteudo.getvalue())
-        #with open(self.caminhoDeckResultante+"/"+"c_adic.dat", "w") as file:
-        #    file.write(conteudo.getvalue())
-        #dados_Dger.ano_inicio_estudo
+        with open(self.caminhoDeckResultante+"/"+"c_adic.dat", "w") as file:
+            file.write(conteudo.getvalue())
 
 
     def transformaAgrint(self):
