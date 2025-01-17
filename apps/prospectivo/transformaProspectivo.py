@@ -7,7 +7,7 @@ import pandas as pd
 from apps.utils.log import Log
 import os.path
 from inewave.newave import Dger
-
+import shutil
 class TransformaProspectivo:
     """
     Calcula os indicadores que são utilizados nas visualizações e comparações
@@ -17,6 +17,16 @@ class TransformaProspectivo:
     def __init__(self, caminhoDeckBase, arquivo_txt):
         self.caminhoDeckBase = caminhoDeckBase
         self.instrucoes = arquivo_txt
+
+        self.caminhoAntesDoCasoBase = "/".join(self.caminhoDeckBase.split("/")[:-1])
+        self.caminhoDeckResultante = self.caminhoAntesDoCasoBase+"/deck_teste_prospectivo"
+
+        if not os.path.exists(self.caminhoDeckResultante):
+            shutil.copytree(self.caminhoDeckBase, self.caminhoDeckResultante)
+        else:
+            #shutil.rmtree(self.caminho_teste_1)
+            #shutil.copytree(self.caminho, self.caminho_teste_1)
+            print("DIRETORIO DO DECK PROSPECTIVO JÁ EXISTE, UTILIZANDO O DIRETORIO EXISTENTE")
         print(self.caminhoDeckBase)
         with open(arquivo_txt, "r") as file:
                 for line in file:
@@ -25,9 +35,9 @@ class TransformaProspectivo:
 
         self.transformaDger()
 
-        
-    def transformaDger(self):
 
+    def transformaDger(self):
+        dados_Dger = Dger.read()
 
         print(self.ano_inicio)
 
