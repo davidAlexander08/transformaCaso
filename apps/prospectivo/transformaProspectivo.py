@@ -39,7 +39,7 @@ class TransformaProspectivo:
         dados_Dger_base = Dger.read(self.caminhoDeckBase+"/dger.dat")        
         self.timeTableInicioEstudoProspectivo =  pd.to_datetime(self.ano_inicio+"-"+str(dados_Dger_base.mes_inicio_estudo)+"-01")
         self.timeTableInicioEstudoBase =  pd.to_datetime(str(dados_Dger_base.ano_inicio_estudo)+"-"+str(dados_Dger_base.mes_inicio_estudo)+"-01")
-        self.delta = timeTableInicioEstudoProspectivo - timeTableInicioEstudoBase
+        self.delta = self.timeTableInicioEstudoProspectivo - self.timeTableInicioEstudoBase
         print(self.delta)
         print(self.timeTableInicioEstudoProspectivo)
         print(self.timeTableInicioEstudoBase)
