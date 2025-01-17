@@ -64,6 +64,9 @@ class TransformaProspectivo:
     def transformaExph(self):
         dados = Exph.read(self.caminhoDeckBase+"/exph.dat")
         print(dados.expansoes)
+        dados.expansoes["data_inicio_enchimento"] = dados.expansoes["data_inicio_enchimento"] + self.delta+ timedelta(days=1)
+        dados.expansoes["data_entrada_operacao"] = dados.expansoes["data_entrada_operacao"] + self.delta+ timedelta(days=1)
+        print(dados.expansoes)
         #dados.curva_seguranca["data"] = dados.curva_seguranca["data"] + self.delta+ timedelta(days=1)
         #conteudo = StringIO()
         #dados.write(conteudo)
