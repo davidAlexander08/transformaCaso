@@ -10,6 +10,7 @@ from inewave.newave import Dger
 from inewave.newave import Agrint
 from inewave.newave import Cadic
 from inewave.newave import Caso
+from inewave.newave import Clast
 import shutil
 from io import StringIO
 
@@ -50,6 +51,11 @@ class TransformaProspectivo:
         #self.transformaAgrint()
         self.transformaCadic()
         self.transformaCasoDat()
+        self.transformaClast()
+
+    def transformaClast(self):
+        dados = Clast.read(self.caminhoDeckBase+"/clast.dat")
+        print(dados.modificacoes)
 
     def transformaCasoDat(self):
         dados = Caso.read(self.caminhoDeckBase+"/caso.dat")
@@ -58,8 +64,6 @@ class TransformaProspectivo:
         dados.write(conteudo)
         with open(self.caminhoDeckResultante+"/"+"caso.dat", "w") as file:
             file.write(conteudo.getvalue())
-
-        print(dados.gerenciador_processos)
 
     def transformaCadic(self):
         dados = Cadic.read(self.caminhoDeckBase+"/c_adic.dat")
