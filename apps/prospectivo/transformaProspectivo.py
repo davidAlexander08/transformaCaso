@@ -44,6 +44,17 @@ class TransformaProspectivo:
         dados_Dger.ano_inicio_estudo
 
         #Altera gerenciador de PLs
+        dados_Dger.utiliza_gerenciamento_pls = 1
+        dados_Dger.utiliza_gerenciamento_pls
+        dados_Dger.comunicacao_dois_niveis = 1
+        dados_Dger.comunicacao_dois_niveis
+        dados_Dger.armazenamento_local_arquivos_temporarios = 1
+        dados_Dger.armazenamento_local_arquivos_temporarios
+        dados_Dger.alocacao_memoria_ena = 1
+        dados_Dger.alocacao_memoria_ena
+        dados_Dger.alocacao_memoria_cortes = 1 
+        dados_Dger.alocacao_memoria_cortes
+
         print(dados_Dger.utiliza_gerenciamento_pls)
         print(dados_Dger.comunicacao_dois_niveis)
         print(dados_Dger.armazenamento_local_arquivos_temporarios)
