@@ -9,6 +9,7 @@ import os.path
 from inewave.newave import Dger
 from inewave.newave import Agrint
 from inewave.newave import Cadic
+from inewave.newave import Caso
 import shutil
 from io import StringIO
 
@@ -46,7 +47,12 @@ class TransformaProspectivo:
         self.transformaDger()
         #self.transformaAgrint()
         self.transformaCadic()
+        self.transformaCasoDat()
 
+    def transformaCasoDat(self):
+        dados = Caso.read(self.caminhoDeckBase+"/caso.dat")
+
+        print(dados.gerenciador_processos)
 
     def transformaCadic(self):
         dados = Cadic.read(self.caminhoDeckBase+"/c_adic.dat")
