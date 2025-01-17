@@ -14,6 +14,7 @@ from inewave.newave import Clast
 from inewave.newave import Curva
 from inewave.newave import Cvar
 from inewave.newave import Dsvagua
+from inewave.newave import Exph
 import shutil
 from io import StringIO
 
@@ -57,16 +58,26 @@ class TransformaProspectivo:
         self.transformaClast()
         self.transformaCurva()
         self.transformaCVAR()
-        self.transformaDsvagua()
+        #self.transformaDsvagua()
+        self.transformaExph()
 
-    def transformaDsvagua(self):
-        dados = Dsvagua.read(self.caminhoDeckBase+"/dsvagua.dat")
-        print(dados.desvios)
+    def transformaExph(self):
+        dados = Exph.read(self.caminhoDeckBase+"/exph.dat")
+        print(dados.expansoes)
         #dados.curva_seguranca["data"] = dados.curva_seguranca["data"] + self.delta+ timedelta(days=1)
         #conteudo = StringIO()
         #dados.write(conteudo)
         #with open(self.caminhoDeckResultante+"/"+"curva.dat", "w") as file:
         #    file.write(conteudo.getvalue())
+
+    #def transformaDsvagua(self):
+    #    dados = Dsvagua.read(self.caminhoDeckBase+"/dsvagua.dat")
+    #    print(dados.desvios)
+    #    #dados.curva_seguranca["data"] = dados.curva_seguranca["data"] + self.delta+ timedelta(days=1)
+    #    #conteudo = StringIO()
+    #    #dados.write(conteudo)
+    #    #with open(self.caminhoDeckResultante+"/"+"curva.dat", "w") as file:
+    #    #    file.write(conteudo.getvalue())
 
     def transformaCVAR(self):
         dados = Cvar.read(self.caminhoDeckBase+"/cvar.dat")
