@@ -59,7 +59,7 @@ class TransformaProspectivo:
 
 
     def transformaCVAR(self):
-        dados = CVAR.read(self.caminhoDeckBase+"/cvar.dat")
+        dados = Cvar.read(self.caminhoDeckBase+"/cvar.dat")
         print(dados.alfa_variavel)
         print(dados.lambda_variavel)
         #dados.curva_seguranca["data"] = dados.curva_seguranca["data"] + self.delta+ timedelta(days=1)
