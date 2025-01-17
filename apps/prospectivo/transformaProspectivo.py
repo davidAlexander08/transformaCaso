@@ -71,7 +71,8 @@ class TransformaProspectivo:
     def transformaManutt(self): ## ESTA FALTANDO O POS, NA INEWAVE QUANDO COLOCA O POS ESTÁ VAZIO, VER ISSO COM ROGERINHO
         dados = Manutt.read(self.caminhoDeckBase+"/manutt.dat")
         print(dados.manutencoes)
-        #dados.geracoes["data"] = dados.geracoes["data"] + self.delta
+        dados.manutencoes["data_inicio"] = dados.manutencoes["data_inicio"] + self.delta
+        print(dados.manutencoes)
         #conteudo = StringIO()
         #dados.write(conteudo)
         #with open(self.caminhoDeckResultante+"/"+"ghmin.dat", "w") as file:
