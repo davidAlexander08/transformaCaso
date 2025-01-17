@@ -81,25 +81,14 @@ class TransformaProspectivo:
 
     def transformaSistema(self): ## ESTA FALTANDO O POS, NA INEWAVE QUANDO COLOCA O POS ESTÁ VAZIO, VER ISSO COM ROGERINHO
         dados = Sistema.read(self.caminhoDeckBase+"/sistema.dat")
-        print(dados.limites_intercambio)
-        print(dados.mercado_energia)
-        print(dados.geracao_usinas_nao_simuladas)
-
         dados.limites_intercambio["data"] = dados.limites_intercambio["data"] +self.delta + timedelta(days=1)
         df_temp = dados.mercado_energia.loc[(dados.mercado_energia["data"] <  datetime(9990, 1, 1))]
         df_temp["data"] = df_temp["data"] + self.delta  + timedelta(days=1)
         dados.mercado_energia.loc[(dados.mercado_energia["data"] <  datetime(9990, 1, 1))] = df_temp
-
         dados.geracao_usinas_nao_simuladas["data"] = dados.geracao_usinas_nao_simuladas["data"] +self.delta + timedelta(days=1)
-
-        print(dados.limites_intercambio)
-        print(dados.mercado_energia)
-        print(dados.geracao_usinas_nao_simuladas)
-        exit(1)
-        dados.rees["ano_fim_individualizado"] = dados.rees["ano_fim_individualizado"] + self.delta.days / 365
         conteudo = StringIO()
         dados.write(conteudo)
-        with open(self.caminhoDeckResultante+"/"+"ree.dat", "w") as file:
+        with open(self.caminhoDeckResultante+"/"+"sistema.dat", "w") as file:
             file.write(conteudo.getvalue())
 
 
