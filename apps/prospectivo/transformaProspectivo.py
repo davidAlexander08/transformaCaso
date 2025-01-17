@@ -22,14 +22,14 @@ class TransformaProspectivo:
 
         self.caminhoAntesDoCasoBase = "/".join(self.caminhoDeckBase.split("/")[:-1])
         self.caminhoDeckResultante = self.caminhoAntesDoCasoBase+"/deck_teste_prospectivo"
-
+        print(self.caminhoDeckResultante)
         if not os.path.exists(self.caminhoDeckResultante):
             shutil.copytree(self.caminhoDeckBase, self.caminhoDeckResultante)
         else:
             #shutil.rmtree(self.caminho_teste_1)
             #shutil.copytree(self.caminho, self.caminho_teste_1)
             print("DIRETORIO DO DECK PROSPECTIVO JÁ EXISTE, UTILIZANDO O DIRETORIO EXISTENTE")
-        print(self.caminhoDeckBase)
+        
         with open(arquivo_txt, "r") as file:
                 for line in file:
                     if("ANOINICIO" in line):
