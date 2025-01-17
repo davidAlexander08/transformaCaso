@@ -22,6 +22,7 @@ from inewave.newave import Modif
 from inewave.newave import Patamar
 from inewave.newave import Ree
 from inewave.newave import Sistema
+from inewave.newave import Vazpast
 from inewave.libs import Restricoes
 import shutil
 from io import StringIO
@@ -68,6 +69,7 @@ class TransformaProspectivo:
         self.transformaCurva()
         self.transformaCVAR()
         self.transformaRee()
+        self.transformaVazpast()
         self.transformaSistema()
         #self.transformaDsvagua()
         self.transformaExph()
@@ -78,6 +80,14 @@ class TransformaProspectivo:
         self.transformaPatamar()
         #self.transformaRestricoes()
         
+
+    def transformaVazpast(self): ## ESTA FALTANDO O POS, NA INEWAVE QUANDO COLOCA O POS ESTÁ VAZIO, VER ISSO COM ROGERINHO
+       with open(self.caminhoDeckBase+"/vazpast.dat", "r") as file:
+                for line in file:
+                    if("ANOPLAN" in line):
+                        self.valores = line.split("=")
+                        print(self.valores)
+                        exit(1)
 
     def transformaSistema(self): ## ESTA FALTANDO O POS, NA INEWAVE QUANDO COLOCA O POS ESTÁ VAZIO, VER ISSO COM ROGERINHO
         dados = Sistema.read(self.caminhoDeckBase+"/sistema.dat")
