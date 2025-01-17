@@ -18,6 +18,8 @@ from inewave.newave import Exph
 from inewave.newave import Expt
 from inewave.newave import Ghmin
 from inewave.newave import Manutt
+from inewave.newave import Modif
+from inewave.newave import Patamar
 import shutil
 from io import StringIO
 
@@ -66,7 +68,20 @@ class TransformaProspectivo:
         self.transformaExpt()
         self.transformaGhmin()
         self.transformaManutt()
+        #self.transformaModif()
+        self.transformaPatamar()
 
+    def transformaPatamar(self): ## ESTA FALTANDO O POS, NA INEWAVE QUANDO COLOCA O POS ESTÁ VAZIO, VER ISSO COM ROGERINHO
+        dados = Patamar.read(self.caminhoDeckBase+"/patamar.dat")
+        print(dados.duracao_mensal_patamares)
+        print(dados.carga_patamares)
+        print(dados.intercambio_patamares)
+        print(dados.usinas_nao_simuladas)
+        #dados.manutencoes["data_inicio"] = dados.manutencoes["data_inicio"] + self.delta
+        #conteudo = StringIO()
+        #dados.write(conteudo)
+        #with open(self.caminhoDeckResultante+"/"+"patamar.dat", "w") as file:
+        #    file.write(conteudo.getvalue())
 
     def transformaManutt(self): ## ESTA FALTANDO O POS, NA INEWAVE QUANDO COLOCA O POS ESTÁ VAZIO, VER ISSO COM ROGERINHO
         dados = Manutt.read(self.caminhoDeckBase+"/manutt.dat")
