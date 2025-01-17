@@ -85,6 +85,13 @@ class TransformaProspectivo:
         print(dados.mercado_energia)
         print(dados.geracao_usinas_nao_simuladas)
 
+        dados.limites_intercambio["data"] = dados.limites_intercambio["data"] +self.delta
+        dados.mercado_energia["data"] = dados.mercado_energia["data"] +self.delta 
+        dados.geracao_usinas_nao_simuladas["data"] = dados.geracao_usinas_nao_simuladas["data"] +self.delta
+
+        print(dados.limites_intercambio)
+        print(dados.mercado_energia)
+        print(dados.geracao_usinas_nao_simuladas)
         exit(1)
         dados.rees["ano_fim_individualizado"] = dados.rees["ano_fim_individualizado"] + self.delta.days / 365
         conteudo = StringIO()
