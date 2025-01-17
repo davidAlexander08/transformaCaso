@@ -12,6 +12,7 @@ from inewave.newave import Cadic
 from inewave.newave import Caso
 from inewave.newave import Clast
 from inewave.newave import Curva
+from inewave.newave import Cvar
 import shutil
 from io import StringIO
 
@@ -54,7 +55,18 @@ class TransformaProspectivo:
         self.transformaCasoDat()
         self.transformaClast()
         self.transformaCurva()
+        self.transformaCVAR()
 
+
+    def transformaCVAR(self):
+        dados = CVAR.read(self.caminhoDeckBase+"/cvar.dat")
+        print(dados.alfa_variavel)
+        print(dados.lambda_variavel)
+        #dados.curva_seguranca["data"] = dados.curva_seguranca["data"] + self.delta+ timedelta(days=1)
+        #conteudo = StringIO()
+        #dados.write(conteudo)
+        #with open(self.caminhoDeckResultante+"/"+"curva.dat", "w") as file:
+        #    file.write(conteudo.getvalue())
 
     def transformaCurva(self):
         dados = Curva.read(self.caminhoDeckBase+"/curva.dat")
