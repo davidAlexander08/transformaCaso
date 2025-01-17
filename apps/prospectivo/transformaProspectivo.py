@@ -49,7 +49,7 @@ class TransformaProspectivo:
 
 
     def transformaCadic(self):
-        dados = Cadic.read(self.caminhoDeckResultante+"/c_adic.dat")
+        dados = Cadic.read(self.caminhoDeckBase+"/c_adic.dat")
         df_temp = dados.cargas.loc[(dados.cargas["data"] <  datetime(9990, 1, 1))]
         df_temp["data"] = df_temp["data"] + self.delta + timedelta(days=1)
         dados.cargas.loc[(dados.cargas["data"] <  datetime(9990, 1, 1))] = df_temp
@@ -60,7 +60,7 @@ class TransformaProspectivo:
 
 
     def transformaAgrint(self):
-        dados = Agrint.read(self.caminhoDeckResultante+"/agrint.dat")
+        dados = Agrint.read(self.caminhoDeckBase+"/agrint.dat")
         print(dados.limites_agrupamentos)
 
 
@@ -72,7 +72,7 @@ class TransformaProspectivo:
 
 
     def transformaDger(self):
-        dados_Dger = Dger.read(self.caminhoDeckResultante+"/dger.dat")
+        dados_Dger = Dger.read(self.caminhoDeckBase+"/dger.dat")
 
         #Altera ano de início do estudo
         dados_Dger.ano_inicio_estudo = self.ano_inicio
