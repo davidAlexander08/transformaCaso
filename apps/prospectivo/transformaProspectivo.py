@@ -59,7 +59,7 @@ class TransformaProspectivo:
     def transformaCurva(self):
         dados = Curva.read(self.caminhoDeckBase+"/curva.dat")
         print(dados.curva_seguranca)
-        dados.curva_seguranca["data"] = dados.curva_seguranca["data"] + self.delta
+        dados.curva_seguranca["data"] = dados.curva_seguranca["data"] + self.delta+ timedelta(days=1)
         print(dados.curva_seguranca)
         #dados.modificacoes["data_inicio"] = dados.modificacoes["data_inicio"] + self.delta
         #dados.modificacoes["data_fim"] = dados.modificacoes["data_fim"] + self.delta
