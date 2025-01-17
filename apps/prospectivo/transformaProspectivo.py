@@ -80,6 +80,12 @@ class TransformaProspectivo:
         dados = Restricoes.read(self.caminhoDeckBase+"/restricao-eletrica.csv")
         print(dados.re_horiz_per(df = True))
         print(dados.re_lim_form_per(df = True))
+        dados.re_horiz_per(df = True)["data_inicio"] = dados.re_horiz_per(df = True)["data_inicio"] + self.delta
+        dados.re_lim_form_per(df = True)["data_inicio"] = dados.re_lim_form_per(df = True)["data_inicio"] + self.delta
+        dados.re_horiz_per(df = True)["data_fim"] = dados.re_horiz_per(df = True)["data_fim"] + self.delta
+        dados.re_lim_form_per(df = True)["data_fim"] = dados.re_lim_form_per(df = True)["data_fim"] + self.delta
+        print(dados.re_horiz_per(df = True))
+        print(dados.re_lim_form_per(df = True))
         
         
 
