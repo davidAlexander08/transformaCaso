@@ -61,7 +61,7 @@ class TransformaProspectivo:
         dados.modificacoes["data_fim"] = dados.modificacoes["data_fim"] + self.delta
         conteudo = StringIO()
         dados.write(conteudo)
-        with open(self.caminhoDeckResultante+"/"+"caso.dat", "w") as file:
+        with open(self.caminhoDeckResultante+"/"+"clast.dat", "w") as file:
             file.write(conteudo.getvalue())
 
     def transformaCasoDat(self):
