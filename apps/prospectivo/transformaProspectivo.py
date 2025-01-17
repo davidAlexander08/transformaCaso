@@ -82,11 +82,24 @@ class TransformaProspectivo:
         #self.transformaModif()
         self.transformaPatamar()
 
-
-    def skip_rows_conditionally(self, row):
-        return row.startswith('&')
-
     def transformaRestricoesEletricas(self): 
+        with open(self.caminhoDeckBase+"/restricao-eletrica.csv", 'r') as file:
+            lines = file.readlines()  # Read all lines into a list
+
+        for i, line in enumerate(lines):
+            if (not line.beginswith("&") ):
+                if("RE-HORIZ-PER" in line):
+                    print(line)
+                if("RE-LIM-FORM-PER-PAT" in line):
+                    print(line)
+                #modified_line = line.replace(str(self.dados_Dger_base.ano_inicio_estudo), str(self.ano_inicio))
+                #lines[i] = modified_line  # Update the line in the list
+                #break  # Assuming you only want to modify the first matching line
+        exit(1)
+        # Write the modified content back to the file
+        #with open(self.caminhoDeckResultante+"/vazpast.dat", "w") as file:
+        #    file.writelines(lines)  # Write all lines (modified and unmodified) back to the file
+
         RestricoesEletricas = pd.read_csv(self.caminhoDeckBase+"/restricao-eletrica.csv", delimiter=';', header=None, 
                  skiprows=lambda x: self.skip_rows_conditionally(x.split(';')[0]))
         print(RestricoesEletricas)
