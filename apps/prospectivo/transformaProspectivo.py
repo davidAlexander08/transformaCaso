@@ -88,15 +88,17 @@ class TransformaProspectivo:
 
     def transformaRestricoesEletricas(self): 
         RestricoesEletricas = pd.read_csv(self.caminhoDeckBase+"/restricao-eletrica.csv", delimiter=';', header=None, 
-                 skiprows=lambda x: self.skip_rows_conditionally(x.split(';')[0])))
-        CadHVolRefPer[2] = CadHVolRefPer[2] +self.delta
-        CadHVolRefPer[3] = CadHVolRefPer[3] +self.delta
-        CadHVolRefPer[2] = pd.to_datetime(CadHVolRefPer[2]).dt.strftime('%Y/%m')
-        CadHVolRefPer[3] = pd.to_datetime(CadHVolRefPer[3]).dt.strftime('%Y/%m')
-        print(CadHVolRefPer)
-
-        VolumeReferencialTipoPadrao.to_csv(self.caminhoDeckResultante+'/restricao-eletrica_teste.csv', index=False, header=False)
-        CadHVolRefPer.to_csv(self.caminhoDeckResultante+'/restricao-eletrica_teste.csv', mode='a', index=False, header=False)
+                 skiprows=lambda x: self.skip_rows_conditionally(x.split(';')[0]))
+        print(RestricoesEletricas)
+        exit(1)
+        #CadHVolRefPer[2] = CadHVolRefPer[2] +self.delta
+        #CadHVolRefPer[3] = CadHVolRefPer[3] +self.delta
+        #CadHVolRefPer[2] = pd.to_datetime(CadHVolRefPer[2]).dt.strftime('%Y/%m')
+        #CadHVolRefPer[3] = pd.to_datetime(CadHVolRefPer[3]).dt.strftime('%Y/%m')
+        #print(CadHVolRefPer)
+#
+        #VolumeReferencialTipoPadrao.to_csv(self.caminhoDeckResultante+'/restricao-eletrica_teste.csv', index=False, header=False)
+        #CadHVolRefPer.to_csv(self.caminhoDeckResultante+'/restricao-eletrica_teste.csv', mode='a', index=False, header=False)
 
 
 
