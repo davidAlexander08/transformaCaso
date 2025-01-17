@@ -16,4 +16,18 @@ class TransformaProspectivo:
 
     def __init__(self, caminhoDeckBase, arquivo_txt):
         self.caminhoDeckBase = caminhoDeckBase
+        self.instrucoes = arquivo_txt
         print(self.caminhoDeckBase)
+        with open(arquivo_txt, "r") as file:
+                for line in file:
+                    if("ANOINICIO" in line):
+                        self.ano_inicio = line.split("=")[1]
+
+        self.transformaDger()
+
+        
+    def transformaDger(self):
+
+
+        print(self.ano_inicio)
+
