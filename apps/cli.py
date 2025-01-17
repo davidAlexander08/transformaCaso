@@ -36,5 +36,6 @@ def prospectivo(arquivo_txt):
             if(flag_prossegue == 1):
                 print("INICIALIZANDO Transformação do deck")
                 TransformaProspectivo(caminho, arquivo_txt)
+                flag_prossegue = 0
 
 cli.add_command(prospectivo)
