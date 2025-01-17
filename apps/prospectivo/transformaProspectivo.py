@@ -78,8 +78,8 @@ class TransformaProspectivo:
         
     def transformaRestricoes(self): ## ESTA FALTANDO O POS, NA INEWAVE QUANDO COLOCA O POS ESTÁ VAZIO, VER ISSO COM ROGERINHO
         dados = Restricoes.read(self.caminhoDeckBase+"/restricao-eletrica.csv")
-        print(dados.re_horiz_per)
-        print(dados.re_lim_form_per)
+        print(dados.re_horiz_per(df = True))
+        print(dados.re_lim_form_per(df = True))
         
         
 
