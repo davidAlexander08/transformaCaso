@@ -51,7 +51,9 @@ class TransformaProspectivo:
     def transformaCadic(self):
         dados = Cadic.read(self.caminhoDeckResultante+"/c_adic.dat")
         print(dados.cargas)
-        df_temp = dados.cargas.loc[(dados.cargas["data"] <  pd.to_datetime("9999-01-01"))]
+        ano_alto = pd.to_datetime("9999-01-01")
+        print("ano_alto: ", ano_alto)
+        df_temp = dados.cargas.loc[(dados.cargas["data"] <  ano_alto)]
         print(df_temp)
 
 
