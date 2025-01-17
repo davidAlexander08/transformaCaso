@@ -37,7 +37,7 @@ class TransformaProspectivo:
                     if("ANOINICIO" in line):
                         self.ano_inicio = line.split("=")[1]
         dados_Dger = Dger.read(self.caminhoDeckResultante+"/dger.dat")        
-        self.timeTableInicioEstudo =  pd.to_datetime(df[self.ano_inicio+"-"str(dados_Dger.mes_inicio_estudo)+"-01"+])
+        self.timeTableInicioEstudo =  pd.to_datetime(df[self.ano_inicio+"-"+str(dados_Dger.mes_inicio_estudo)+"-01"])
         print(self.timeTableInicioEstudo)
         self.transformaDger()
         #self.transformaAgrint()
