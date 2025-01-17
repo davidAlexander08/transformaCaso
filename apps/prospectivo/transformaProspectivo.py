@@ -37,7 +37,8 @@ class TransformaProspectivo:
 
 
     def transformaDger(self):
-        dados_Dger = Dger.read()
+        dados_Dger = Dger.read(self.caminhoDeckResultante+"/dger.dat")
 
         print(self.ano_inicio)
+        print(dados_Dger.ano_inicio_estudo)
 
