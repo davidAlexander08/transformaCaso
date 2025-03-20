@@ -120,6 +120,7 @@ class Transforma3DP:
         dados_Dger.num_aberturas            = 10
         dados_Dger.num_series_sinteticas    = 500
         dados_Dger.num_minimo_iteracoes     = 10
+        dados_Dger.outros_usos_da_agua     = 0
         conteudo_dger = StringIO()
         dados_Dger.write(conteudo_dger)
         with open(self.caminhoDeckResultante+"/"+"dger.dat", "w") as file:
