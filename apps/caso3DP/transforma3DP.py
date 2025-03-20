@@ -117,7 +117,7 @@ class Transforma3DP:
         dados_confhd = Confhd.read(self.caminhoDeckBase+"/confhd.dat")
         dados_dsvagua = Dsvagua.read(self.caminhoDeckBase+"/dsvagua.dat")
 
-        print(df_dsvagua)
+        print(dados_dsvagua.desvios)
         print(dados_confhd.usinas)
 
         dados_confhd.usinas = dados_confhd.usinas.loc[(dados_confhd.usinas["codigo_usina"].isin(self.usinasRemanescentes))].reset_index(drop = True)
