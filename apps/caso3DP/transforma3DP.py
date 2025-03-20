@@ -134,7 +134,6 @@ class Transforma3DP:
         rees_remanescentes = dados_confhd.usinas["ree"].unique()
         dados_ree.rees = dados_ree.rees.loc[(dados_ree.rees["codigo"].isin(rees_remanescentes))].reset_index(drop = True)
         print(rees_remanescentes)
-        exit(1)
 
         conteudo = StringIO()
         dados_confhd.write(conteudo)
