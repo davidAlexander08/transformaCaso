@@ -145,7 +145,7 @@ class Transforma3DP:
         with open(input_file, "w", encoding="utf-8") as f:
             f.write(content)
 
-        print(f"File successfully converted to UTF-8 and saved as {output_file}")
+        print(f"File successfully converted to UTF-8 and saved as {input_file}")
 
     def retiraUsinas(self): 
         dados_confhd = Confhd.read(self.caminhoDeckBase+"/confhd.dat")
