@@ -132,6 +132,7 @@ class Transforma3DP:
         print(dados_confhd.usinas)
 
         rees_remanescentes = dados_confhd.usinas["ree"].unique()
+        dados_ree.rees = dados_ree.rees.loc[(dados_ree.rees["codigo"].isin(rees_remanescentes))].reset_index(drop = True)
         print(rees_remanescentes)
         exit(1)
 
@@ -145,6 +146,10 @@ class Transforma3DP:
         with open(self.caminhoDeckResultante+"/"+"dsvagua.dat", "w") as file:
             file.write(conteudo.getvalue())
 
+        conteudo = StringIO()
+        dados_ree.write(conteudo)
+        with open(self.caminhoDeckResultante+"/"+"ree.dat", "w") as file:
+            file.write(conteudo.getvalue())
 
 
         if(dados_re.usinas_conjuntos is not None and dados_re.restricoes is not None  ):
