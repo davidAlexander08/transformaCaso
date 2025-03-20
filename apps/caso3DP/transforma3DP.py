@@ -120,7 +120,6 @@ class Transforma3DP:
         dados_exph = Exph.read(self.caminhoDeckBase+"/exph.dat")
         dados_re = Re.read(self.caminhoDeckBase+"/re.dat")
         print(dados_exph.expansoes)
-        exit(1)
         print(dados_dsvagua.desvios)
         print(dados_confhd.usinas)
 
