@@ -134,9 +134,13 @@ class Transforma3DP:
         print(dados_sistema.limites_intercambio)
         print(dados_sistema.mercado_energia)
         print(dados_sistema.geracao_usinas_nao_simuladas)
-
+        dados_sistema.limites_intercambio = dados_sistema.limites_intercambio.loc[(dados_sistema.limites_intercambio["data"] <= timeTableFinalEstudoBase)].reset_index(drop = True)
+        dados_sistema.mercado_energia = dados_sistema.mercado_energia.loc[(dados_sistema.mercado_energia["data"] <= timeTableFinalEstudoBase)].reset_index(drop = True)
+        dados_sistema.geracao_usinas_nao_simuladas = dados_sistema.geracao_usinas_nao_simuladas.loc[(dados_sistema.geracao_usinas_nao_simuladas["data"] <= timeTableFinalEstudoBase)].reset_index(drop = True)
         #dados_Dger.ano_inicio_estudo
-
+        print(dados_sistema.limites_intercambio)
+        print(dados_sistema.mercado_energia)
+        print(dados_sistema.geracao_usinas_nao_simuladas)
 
 
 
