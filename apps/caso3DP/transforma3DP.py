@@ -119,7 +119,8 @@ class Transforma3DP:
         dados_dsvagua = Dsvagua.read(self.caminhoDeckBase+"/dsvagua.dat")
         dados_exph = Exph.read(self.caminhoDeckBase+"/exph.dat")
         dados_re = Re.read(self.caminhoDeckBase+"/re.dat")
-
+        print(dados_exph.expansoes)
+        exit(1)
         print(dados_dsvagua.desvios)
         print(dados_confhd.usinas)
 
@@ -139,10 +140,6 @@ class Transforma3DP:
         dados_dsvagua.desvios = dados_dsvagua.desvios.loc[(dados_dsvagua.desvios["codigo_usina"].isin(self.usinasRemanescentes))].reset_index(drop = True)
         print(dados_dsvagua.desvios)
         print(dados_confhd.usinas)
-
-
-
-
 
         conteudo = StringIO()
         dados_confhd.write(conteudo)
