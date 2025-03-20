@@ -163,6 +163,27 @@ class Transforma3DP:
         #    file.write(conteudo.getvalue())
 
 
+        input_file = self.caminhoDeckBase+"/modif.dat"
+        output_file = self.caminhoDeckResultante+"/modif.dat"
+
+        with open(input_file, "r", encoding="utf-8") as f:
+            lines = f.readlines()
+
+        filtered_lines = []
+        for line in lines:
+            parts = line.split()
+            # Check if the line contains a year and if it's greater than 2020
+            if len(parts) >= 3 and parts[-2].isdigit():  
+                year = int(parts[-2])
+                if year > 2020:
+                    continue  # Skip lines where the year is greater than 2020
+            
+            filtered_lines.append(line)  # Keep everything else
+        # Save filtered content
+        with open(output_file, "w", encoding="utf-8") as f:
+            f.writelines(filtered_lines)
+
+        print(f"Filtered file saved as {output_file}")
 
 
 
@@ -253,7 +274,6 @@ class Transforma3DP:
             # Write the cleaned lines back to a new file
             with open(input_file, "w", encoding="utf-8") as f:
                 f.writelines(clean_lines)
-
 
 
 
