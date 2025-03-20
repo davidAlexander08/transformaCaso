@@ -46,7 +46,7 @@ def prospectivo(arquivo_txt):
 def prospectivo(arquivo_txt):
     
     warnings.filterwarnings('ignore')
-    from apps.3DP.transforma3DP import Transforma3DP
+    from apps.caso3DP.transforma3DP import Transforma3DP
     print("--------- Realizando Transformação do caso em reduzido 3DP---------------")
     flag_prossegue = 0
     with open(arquivo_txt, "r") as file:
