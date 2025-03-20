@@ -113,9 +113,13 @@ class Transforma3DP:
 
     def alteraHorizonte(self):
         dados_Dger = Dger.read(self.caminhoDeckBase+"/dger.dat")
-        dados_Dger.num_anos_estudo = 1
-        dados_Dger.num_anos_pos_estudo = 0
-
+        dados_Dger.num_anos_estudo          = 1
+        dados_Dger.num_anos_pos_estudo      = 0
+        dados_Dger.num_max_iteracoes        = 10
+        dados_Dger.num_forwards             = 50
+        dados_Dger.num_aberturas            = 10
+        dados_Dger.num_series_sinteticas    = 500
+        dados_Dger.num_minimo_iteracoes     = 10
         conteudo_dger = StringIO()
         dados_Dger.write(conteudo_dger)
         with open(self.caminhoDeckResultante+"/"+"dger.dat", "w") as file:
