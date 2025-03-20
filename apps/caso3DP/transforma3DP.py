@@ -146,6 +146,27 @@ class Transforma3DP:
         with open(self.caminhoDeckResultante+"/"+"c_adic.dat", "w") as file:
             file.write(conteudo.getvalue())
 
+        dados_pat = Patamar.read(self.caminhoDeckBase+"/patamar.dat")
+        dados_pat.duracao_mensal_patamares = dados_pat.duracao_mensal_patamares.loc[(dados_pat.duracao_mensal_patamares["data"] <= timeTableFinalEstudoBase)].reset_index(drop = True)
+        dados_pat.carga_patamares = dados_pat.carga_patamares.loc[(dados_pat.carga_patamares["data"] <= timeTableFinalEstudoBase)].reset_index(drop = True)
+        dados_pat.intercambio_patamares = dados_pat.intercambio_patamares.loc[(dados_pat.intercambio_patamares["data"] <= timeTableFinalEstudoBase)].reset_index(drop = True)
+        dados_pat.usinas_nao_simuladas = dados_pat.usinas_nao_simuladas.loc[(dados_pat.usinas_nao_simuladas["data"] <= timeTableFinalEstudoBase)].reset_index(drop = True)
+
+        conteudo = StringIO()
+        dados_pat.write(conteudo)
+        with open(self.caminhoDeckResultante+"/"+"patamar.dat", "w") as file:
+            file.write(conteudo.getvalue())
+
+
+
+
+
+
+
+
+
+
+
 
     def transformaDgerUTF8(self):
 
