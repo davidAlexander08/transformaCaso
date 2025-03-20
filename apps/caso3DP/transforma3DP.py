@@ -34,6 +34,7 @@ class Transforma3DP:
     DIR_SINTESE = "sintese"
 
     def __init__(self, caminhoDeckBase):
+        print(caminhoDeckBase)
         self.caminhoDeckBase = caminhoDeckBase
         self.caminhoAntesDoCasoBase = "/".join(self.caminhoDeckBase.split("/")[:-1])
         self.caminhoDeckResultante = self.caminhoAntesDoCasoBase+"/deck_3DP"
