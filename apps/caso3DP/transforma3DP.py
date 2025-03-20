@@ -125,7 +125,11 @@ class Transforma3DP:
         with open(self.caminhoDeckResultante+"/"+"dger.dat", "w") as file:
             file.write(conteudo_dger.getvalue())
 
+        timeTableInicioEstudoBase =  pd.to_datetime(str(dados_Dger_base.ano_inicio_estudo)+"-"+str(dados_Dger_base.mes_inicio_estudo)+"-01")
+        timeTableFinalEstudoBase = pd.to_datetime(f"{timeTableInicioEstudoBase.year + dados_Dger.num_anos_estudo - 1}-12-31")
 
+        print(timeTableInicioEstudoBase)
+        print(timeTableFinalEstudoBase)
         dados_sistema = Sistema.read(self.caminhoDeckBase+"/sistema.dat")
         print(dados_sistema.limites_intercambio)
         print(dados_sistema.mercado_energia)
