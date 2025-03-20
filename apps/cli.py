@@ -40,32 +40,12 @@ def prospectivo(arquivo_txt):
 
 
 @click.command("caso3DP")
-@click.argument(
-    "arquivo_txt",
-)
-def caso3DP(arquivo_txt):
+def caso3DP():
     
     warnings.filterwarnings('ignore')
     from apps.caso3DP.transforma3DP import Transforma3DP
     print("--------- Realizando Transformação do caso em reduzido 3DP---------------")
-    flag_prossegue = 0
-    with open(arquivo_txt, "r") as file:
-        for line in file:
-            if("caminho" in line):
-                caminho = line.split('"')[1]
-                if os.path.isdir(caminho):
-                    print("Pasta: ", caminho, " Existe, Prosseguindo")
-                    flag_prossegue = 1
-                else:
-                    print("ERRO: Pasta: ", caminho, " Não Existe")
-                    exit(1)
-                    
-            if(line.startswith("&")):
-                continue  
-            if(flag_prossegue == 1):
-                print("INICIALIZANDO Transformação do deck")
-                Transforma3DP(caminho, arquivo_txt)
-                flag_prossegue = 0
+    Transforma3DP(caminho)
 
 cli.add_command(prospectivo)
 cli.add_command(caso3DP)
