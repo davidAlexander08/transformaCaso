@@ -47,7 +47,7 @@ class Transforma3DP:
             #shutil.rmtree(self.caminho_teste_1)
             #shutil.copytree(self.caminho, self.caminho_teste_1)
             print("DIRETORIO DO DECK PROSPECTIVO JÁ EXISTE, UTILIZANDO O DIRETORIO EXISTENTE")
-        #self.dados_Dger_base = Dger.read(self.caminhoDeckBase+"/dger.dat")    
+        self.dados_Dger_base = Dger.read(self.caminhoDeckBase+"/dger.dat")    
         #print(self.dados_Dger_base.mes_inicio_estudo)    
         #print(self.dados_Dger_base.ano_inicio_estudo)    
         #self.timeTableInicioEstudoBase =  pd.to_datetime(str(self.dados_Dger_base.ano_inicio_estudo)+"-"+str(self.dados_Dger_base.mes_inicio_estudo)+"-01")
@@ -123,6 +123,26 @@ class Transforma3DP:
         print(dados_dsvagua.desvios)
         print(dados_confhd.usinas)
 
+        dados_confhd.usinas = dados_confhd.usinas.loc[(dados_confhd.usinas["codigo_usina"].isin(self.usinasRemanescentes))].reset_index(drop = True)
+        dados_dsvagua.desvios = dados_dsvagua.desvios.loc[(dados_dsvagua.desvios["codigo_usina"].isin(self.usinasRemanescentes))].reset_index(drop = True)
+        print(dados_dsvagua.desvios)
+        print(dados_confhd.usinas)
+
+        rees_remanescentes = dados_confhd["ree"].unique()
+        print(rees_remanescentes)
+        exit(1)
+
+        conteudo = StringIO()
+        dados_confhd.write(conteudo)
+        with open(self.caminhoDeckResultante+"/"+"confhd.dat", "w") as file:
+            file.write(conteudo.getvalue())
+
+        conteudo = StringIO()
+        dados_dsvagua.write(conteudo)
+        with open(self.caminhoDeckResultante+"/"+"dsvagua.dat", "w") as file:
+            file.write(conteudo.getvalue())
+
+
 
         if(dados_re.usinas_conjuntos is not None and dados_re.restricoes is not None  ):
             print(dados_re.usinas_conjuntos)
@@ -135,20 +155,7 @@ class Transforma3DP:
                 file.write(conteudo.getvalue())
 
 
-        dados_confhd.usinas = dados_confhd.usinas.loc[(dados_confhd.usinas["codigo_usina"].isin(self.usinasRemanescentes))].reset_index(drop = True)
-        dados_dsvagua.desvios = dados_dsvagua.desvios.loc[(dados_dsvagua.desvios["codigo_usina"].isin(self.usinasRemanescentes))].reset_index(drop = True)
-        print(dados_dsvagua.desvios)
-        print(dados_confhd.usinas)
 
-        conteudo = StringIO()
-        dados_confhd.write(conteudo)
-        with open(self.caminhoDeckResultante+"/"+"confhd.dat", "w") as file:
-            file.write(conteudo.getvalue())
-
-        conteudo = StringIO()
-        dados_dsvagua.write(conteudo)
-        with open(self.caminhoDeckResultante+"/"+"dsvagua.dat", "w") as file:
-            file.write(conteudo.getvalue())
 
         if(dados_exph.expansoes is not None):
             print(dados_exph.expansoes)
