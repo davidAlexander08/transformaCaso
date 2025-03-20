@@ -159,6 +159,17 @@ class Transforma3DP:
             with open(self.caminhoDeckResultante+"/"+"exph.dat", "w") as file:
                 file.write(conteudo.getvalue())
 
+            input_file = self.caminhoDeckResultante+"/"+"exph.dat"
+            # Read the file and filter out lines containing only "9999"
+            with open(input_file, "r", encoding="utf-8") as f:
+                lines = f.readlines()
+            # Remove lines that contain exactly "9999" (trimming spaces to be safe)
+            clean_lines = [line for line in lines if line.strip() != "9999"]
+            # Write the cleaned lines back to a new file
+            with open(input_file, "w", encoding="utf-8") as f:
+                f.writelines(clean_lines)
+
+
     #def transformaRestricoes(self):
     #    dados = Restricoes.read(self.caminhoDeckBase+"/restricao-eletrica.csv")
     #    print(dados.re_horiz_per(df = True))
