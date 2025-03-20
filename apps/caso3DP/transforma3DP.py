@@ -116,13 +116,15 @@ class Transforma3DP:
     def retiraUsinas(self): 
         dados_confhd = Confhd.read(self.caminhoDeckBase+"/confhd.dat")
         dados_dsvagua = Dsvagua.read(self.caminhoDeckBase+"/dsvagua.dat")
+        dados_exph = Exph.read(self.caminhoDeckBase+"/exph.dat")
 
         print(dados_dsvagua.desvios)
         print(dados_confhd.usinas)
+        print(dados_exph.expansoes)
 
         dados_confhd.usinas = dados_confhd.usinas.loc[(dados_confhd.usinas["codigo_usina"].isin(self.usinasRemanescentes))].reset_index(drop = True)
         dados_dsvagua.desvios = dados_dsvagua.desvios.loc[(dados_dsvagua.desvios["codigo_usina"].isin(self.usinasRemanescentes))].reset_index(drop = True)
-
+        dados_exph.expansoes = dados_exph.expansoes.loc[(dados_exph.expansoes["codigo_usina"].isin(self.usinasRemanescentes))].reset_index(drop = True)
         print(dados_dsvagua.desvios)
         print(dados_confhd.usinas)
 
@@ -134,6 +136,11 @@ class Transforma3DP:
         conteudo = StringIO()
         dados_dsvagua.write(conteudo)
         with open(self.caminhoDeckResultante+"/"+"dsvagua.dat", "w") as file:
+            file.write(conteudo.getvalue())
+
+        conteudo = StringIO()
+        dados_exph.write(conteudo)
+        with open(self.caminhoDeckResultante+"/"+"exph.dat", "w") as file:
             file.write(conteudo.getvalue())
 
     #def transformaRestricoes(self):
