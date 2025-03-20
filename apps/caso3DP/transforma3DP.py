@@ -128,24 +128,23 @@ class Transforma3DP:
         timeTableInicioEstudoBase =  pd.to_datetime(str(dados_Dger.ano_inicio_estudo)+"-"+str(dados_Dger.mes_inicio_estudo)+"-01")
         timeTableFinalEstudoBase = pd.to_datetime(f"{timeTableInicioEstudoBase.year + dados_Dger.num_anos_estudo - 1}-12-31")
 
-        print(timeTableInicioEstudoBase)
-        print(timeTableFinalEstudoBase)
+
         dados_sistema = Sistema.read(self.caminhoDeckBase+"/sistema.dat")
-        print(dados_sistema.limites_intercambio)
-        print(dados_sistema.mercado_energia)
-        print(dados_sistema.geracao_usinas_nao_simuladas)
         dados_sistema.limites_intercambio = dados_sistema.limites_intercambio.loc[(dados_sistema.limites_intercambio["data"] <= timeTableFinalEstudoBase)].reset_index(drop = True)
         dados_sistema.mercado_energia = dados_sistema.mercado_energia.loc[(dados_sistema.mercado_energia["data"] <= timeTableFinalEstudoBase)].reset_index(drop = True)
         dados_sistema.geracao_usinas_nao_simuladas = dados_sistema.geracao_usinas_nao_simuladas.loc[(dados_sistema.geracao_usinas_nao_simuladas["data"] <= timeTableFinalEstudoBase)].reset_index(drop = True)
-        #dados_Dger.ano_inicio_estudo
-        print(dados_sistema.limites_intercambio)
-        print(dados_sistema.mercado_energia)
-        print(dados_sistema.geracao_usinas_nao_simuladas)
         conteudo = StringIO()
         dados_sistema.write(conteudo)
         with open(self.caminhoDeckResultante+"/"+"sistema.dat", "w") as file:
             file.write(conteudo.getvalue())
 
+
+        dados_c_adic = Cadic.read(self.caminhoDeckBase+"/c_adic.dat")
+        dados_c_adic.cargas = dados_c_adic.cargas.loc[(dados_c_adic.cargas["data"] <= timeTableFinalEstudoBase)].reset_index(drop = True)
+        conteudo = StringIO()
+        dados_c_adic.write(conteudo)
+        with open(self.caminhoDeckResultante+"/"+"c_adic.dat", "w") as file:
+            file.write(conteudo.getvalue())
 
 
     def transformaDgerUTF8(self):
@@ -176,19 +175,14 @@ class Transforma3DP:
         dados_exph = Exph.read(self.caminhoDeckBase+"/exph.dat")
         dados_re = Re.read(self.caminhoDeckBase+"/re.dat")
         dados_ree = Ree.read(self.caminhoDeckBase+"/ree.dat")
-        print(dados_exph.expansoes)
-        print(dados_dsvagua.desvios)
-        print(dados_confhd.usinas)
-        print(dados_ree.rees)
+
 
         dados_confhd.usinas = dados_confhd.usinas.loc[(dados_confhd.usinas["codigo_usina"].isin(self.usinasRemanescentes))].reset_index(drop = True)
         dados_dsvagua.desvios = dados_dsvagua.desvios.loc[(dados_dsvagua.desvios["codigo_usina"].isin(self.usinasRemanescentes))].reset_index(drop = True)
-        print(dados_dsvagua.desvios)
-        print(dados_confhd.usinas)
+
 
         rees_remanescentes = dados_confhd.usinas["ree"].unique()
         dados_ree.rees = dados_ree.rees.loc[(dados_ree.rees["codigo"].isin(rees_remanescentes))].reset_index(drop = True)
-        print(rees_remanescentes)
 
         conteudo = StringIO()
         dados_confhd.write(conteudo)
@@ -207,8 +201,6 @@ class Transforma3DP:
 
 
         if(dados_re.usinas_conjuntos is not None and dados_re.restricoes is not None  ):
-            print(dados_re.usinas_conjuntos)
-            print(dados_re.restricoes)
             dados_re.usinas_conjuntos = dados_re.usinas_conjuntos.loc[(dados_re.usinas_conjuntos["codigo_usina"].isin(self.usinasRemanescentes))].reset_index(drop = True)
             dados_re.restricoes = dados_re.restricoes.loc[(dados_re.restricoes["conjunto"].isin(dados_re.usinas_conjuntos["conjunto"].tolist()))].reset_index(drop = True)
             conteudo = StringIO()
@@ -220,9 +212,7 @@ class Transforma3DP:
 
 
         if(dados_exph.expansoes is not None):
-            print(dados_exph.expansoes)
             dados_exph.expansoes = dados_exph.expansoes.loc[(dados_exph.expansoes["codigo_usina"].isin(self.usinasRemanescentes))].reset_index(drop = True)
-            print(dados_exph.expansoes)
             conteudo = StringIO()
             dados_exph.write(conteudo)
             with open(self.caminhoDeckResultante+"/"+"exph.dat", "w") as file:
@@ -237,6 +227,21 @@ class Transforma3DP:
             # Write the cleaned lines back to a new file
             with open(input_file, "w", encoding="utf-8") as f:
                 f.writelines(clean_lines)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     def transformaRee(self): 
         dados = Ree.read(self.caminhoDeckBase+"/ree.dat")
