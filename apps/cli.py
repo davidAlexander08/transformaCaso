@@ -43,7 +43,7 @@ def prospectivo(arquivo_txt):
 @click.argument(
     "arquivo_txt",
 )
-def prospectivo(arquivo_txt):
+def caso3DP(arquivo_txt):
     
     warnings.filterwarnings('ignore')
     from apps.caso3DP.transforma3DP import Transforma3DP
