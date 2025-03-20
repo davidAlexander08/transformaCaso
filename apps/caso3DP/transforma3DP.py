@@ -127,9 +127,7 @@ class Transforma3DP:
 
     def transformaDgerUTF8(self):
 
-        input_file = "dger.dat"
-        output_file = "dger_utf8.dat"
-
+        input_file = self.caminhoDeckBase+"dger.dat"
         # Read the file in binary mode and detect encoding
         with open(input_file, "rb") as f:
             raw_data = f.read()
@@ -144,7 +142,7 @@ class Transforma3DP:
             content = f.read()
 
         # Save as UTF-8
-        with open(output_file, "w", encoding="utf-8") as f:
+        with open(input_file, "w", encoding="utf-8") as f:
             f.write(content)
 
         print(f"File successfully converted to UTF-8 and saved as {output_file}")
