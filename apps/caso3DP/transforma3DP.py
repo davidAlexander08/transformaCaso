@@ -124,6 +124,13 @@ class Transforma3DP:
         dados_Dger.write(conteudo_dger)
         with open(self.caminhoDeckResultante+"/"+"dger.dat", "w") as file:
             file.write(conteudo_dger.getvalue())
+
+
+        dados_sistema = Sistema.read(self.caminhoDeckBase+"/sistema.dat")
+        print(dados_sistema.limites_intercambio)
+        print(dados_sistema.mercado_energia)
+        print(dados_sistema.geracao_usinas_nao_simuladas)
+
         #dados_Dger.ano_inicio_estudo
 
 
