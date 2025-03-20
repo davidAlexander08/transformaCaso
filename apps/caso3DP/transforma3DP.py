@@ -153,6 +153,7 @@ class Transforma3DP:
         if(dados_exph.expansoes is not None):
             print(dados_exph.expansoes)
             dados_exph.expansoes = dados_exph.expansoes.loc[(dados_exph.expansoes["codigo_usina"].isin(self.usinasRemanescentes))].reset_index(drop = True)
+            print(dados_exph.expansoes)
             conteudo = StringIO()
             dados_exph.write(conteudo)
             with open(self.caminhoDeckResultante+"/"+"exph.dat", "w") as file:
