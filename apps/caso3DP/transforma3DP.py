@@ -114,28 +114,27 @@ class Transforma3DP:
 
 
     def retiraUsinas(self): 
-        dados = Confhd.read(self.caminhoDeckBase+"/confhd.dat").usinas
-        dados_dsvagua = Dsvagua.read(self.caminhoDeckBase+"/dsvagua.dat").desvios
-        print(dados_dsvagua)
+        dados_confhd = Confhd.read(self.caminhoDeckBase+"/confhd.dat")
+        dados_dsvagua = Dsvagua.read(self.caminhoDeckBase+"/dsvagua.dat")
 
-        print(dados)
-        dados = dados.loc[(dados["codigo_usina"].isin(self.usinasRemanescentes))].reset_index(drop = True)
-        dados_dsvagua = dados_dsvagua.loc[(dados_dsvagua["codigo_usina"].isin(self.usinasRemanescentes))].reset_index(drop = True)
+        print(df_dsvagua)
+        print(dados_confhd.usinas)
 
-        print(dados_dsvagua)
+        dados_confhd.usinas = dados_confhd.usinas.loc[(dados_confhd.usinas["codigo_usina"].isin(self.usinasRemanescentes))].reset_index(drop = True)
+        dados_dsvagua.desvios = dados_dsvagua.desvios.loc[(dados_dsvagua.desvios["codigo_usina"].isin(self.usinasRemanescentes))].reset_index(drop = True)
 
-        print(dados)
-        exit(1)
-        dados.limites_intercambio["data"] = dados.limites_intercambio["data"] +self.delta + timedelta(days=1)
-        df_temp = dados.mercado_energia.loc[(dados.mercado_energia["data"] <  datetime(9990, 1, 1))]
-        df_temp["data"] = df_temp["data"] + self.delta  + timedelta(days=1)
-        dados.mercado_energia.loc[(dados.mercado_energia["data"] <  datetime(9990, 1, 1))] = df_temp
-        dados.geracao_usinas_nao_simuladas["data"] = dados.geracao_usinas_nao_simuladas["data"] +self.delta + timedelta(days=1)
+        print(dados_dsvagua.desvios)
+        print(dados_confhd.usinas)
+
         conteudo = StringIO()
-        dados.write(conteudo)
-        with open(self.caminhoDeckResultante+"/"+"sistema.dat", "w") as file:
+        dados_confhd.write(conteudo)
+        with open(self.caminhoDeckResultante+"/"+"confhd.dat", "w") as file:
             file.write(conteudo.getvalue())
 
+        conteudo = StringIO()
+        dados_dsvagua.write(conteudo)
+        with open(self.caminhoDeckResultante+"/"+"dsvagua.dat", "w") as file:
+            file.write(conteudo.getvalue())
 
     #def transformaRestricoes(self):
     #    dados = Restricoes.read(self.caminhoDeckBase+"/restricao-eletrica.csv")
