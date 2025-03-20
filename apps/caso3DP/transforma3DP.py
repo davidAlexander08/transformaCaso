@@ -46,9 +46,7 @@ class Transforma3DP:
             #shutil.copytree(self.caminho, self.caminho_teste_1)
             print("DIRETORIO DO DECK PROSPECTIVO JÁ EXISTE, UTILIZANDO O DIRETORIO EXISTENTE")
         self.dados_Dger_base = Dger.read(self.caminhoDeckBase+"/dger.dat")        
-        self.timeTableInicioEstudoProspectivo =  pd.to_datetime(self.ano_inicio+"-"+str(self.dados_Dger_base.mes_inicio_estudo)+"-01")
         self.timeTableInicioEstudoBase =  pd.to_datetime(str(self.dados_Dger_base.ano_inicio_estudo)+"-"+str(self.dados_Dger_base.mes_inicio_estudo)+"-01")
-        self.delta = self.timeTableInicioEstudoProspectivo - self.timeTableInicioEstudoBase
         exit(1)
         print(self.delta)
         print(self.timeTableInicioEstudoProspectivo)
