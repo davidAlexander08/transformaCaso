@@ -122,8 +122,18 @@ class Transforma3DP:
 
         print(dados_dsvagua.desvios)
         print(dados_confhd.usinas)
-        print(dados_re.usinas_conjuntos)
-        print(dados_re.restricoes)
+
+
+        if(dados_re.usinas_conjuntos is not None and dados_re.restricoes is not None  ):
+            print(dados_re.usinas_conjuntos)
+            print(dados_re.restricoes)
+            dados_re.usinas_conjuntos = dados_re.usinas_conjuntos.loc[(dados_re.usinas_conjuntos["codigo_usina"].isin(self.usinasRemanescentes))].reset_index(drop = True)
+            dados_re.restricoes = dados_re.restricoes.loc[(dados_re.restricoes["conjunto"].isin(dados_re.usinas_conjuntos["conjunto"].tolist()))].reset_index(drop = True)
+            conteudo = StringIO()
+            dados_re.write(conteudo)
+            with open(self.caminhoDeckResultante+"/"+"re.dat", "w") as file:
+                file.write(conteudo.getvalue())
+
         exit(1)
 
         dados_confhd.usinas = dados_confhd.usinas.loc[(dados_confhd.usinas["codigo_usina"].isin(self.usinasRemanescentes))].reset_index(drop = True)
