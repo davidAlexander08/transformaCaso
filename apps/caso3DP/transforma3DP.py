@@ -114,7 +114,7 @@ class Transforma3DP:
 
 
     def retiraUsinas(self): 
-        dados = Confhd.read(self.caminhoDeckBase+"/confhd.dat").cadastro
+        dados = Confhd.read(self.caminhoDeckBase+"/confhd.dat").usinas
         print(dados)
         exit(1)
         dados.limites_intercambio["data"] = dados.limites_intercambio["data"] +self.delta + timedelta(days=1)
