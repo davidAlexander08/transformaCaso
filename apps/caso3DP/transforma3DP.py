@@ -113,32 +113,27 @@ class Transforma3DP:
 
     def alteraHorizonte(self):
 
-        input_file = self.caminhoDeckResultante+"/"+"dger.dat"
-        output_file = self.caminhoDeckResultante+"/"+"dger_modified.dat"
+        input_file = "dger.dat"
+        output_file = "dger_utf8.dat"
 
-        # Dictionary mapping old values to new values
-        changes = {
-            r"(No\. DE ANOS DO EST\s+)(\d+)": r"\g<1>1",
-            r"(No\. DE ANOS POS\s+)(\d+)": r"\g<1>0",
-            r"(No\. MAX\. DE ITER\.\s+)(\d+)": r"\g<1>10",
-            r"(No DE SIM\. FORWARD\s+)(\d+)": r"\g<1>50",
-            r"(No DE ABERTURAS\s+)(\d+)": r"\g<1>5",
-            r"(No DE SERIES SINT\.\s+)(\d+)": r"\g<1>100",
-        }
+        # Read the file in binary mode and detect encoding
+        with open(input_file, "rb") as f:
+            raw_data = f.read()
 
-        # Read the file
-        with open(input_file, "r", encoding="utf-8") as f:
+        # Try detecting the encoding
+        import chardet
+        detected_encoding = chardet.detect(raw_data)["encoding"]
+        print(f"Detected encoding: {detected_encoding}")
+
+        # Read the file using the detected encoding and re-save as UTF-8
+        with open(input_file, "r", encoding=detected_encoding, errors="replace") as f:
             content = f.read()
 
-        # Apply replacements
-        for pattern, replacement in changes.items():
-            content = re.sub(pattern, replacement, content)
-
-        # Save the modified content
+        # Save as UTF-8
         with open(output_file, "w", encoding="utf-8") as f:
             f.write(content)
 
-        print(f"Modified file saved as {output_file}")
+        print(f"File successfully converted to UTF-8 and saved as {output_file}")
 
     def retiraUsinas(self): 
         dados_confhd = Confhd.read(self.caminhoDeckBase+"/confhd.dat")
