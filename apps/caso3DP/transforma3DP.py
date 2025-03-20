@@ -146,6 +146,19 @@ class Transforma3DP:
         with open(self.caminhoDeckResultante+"/"+"c_adic.dat", "w") as file:
             file.write(conteudo.getvalue())
 
+
+        dados_curva = Curva.read(self.caminhoDeckBase+"/curva.dat")
+        dados_curva.curva_seguranca = dados_curva.curva_seguranca.loc[(dados_curva.curva_seguranca["data"] <= timeTableFinalEstudoBase)].reset_index(drop = True)
+        conteudo = StringIO()
+        dados_curva.write(conteudo)
+        with open(self.caminhoDeckResultante+"/"+"curva.dat", "w") as file:
+            file.write(conteudo.getvalue())
+
+
+
+
+
+
         #dados_pat = Patamar.read(self.caminhoDeckBase+"/patamar.dat")
 #
         #print(dados_pat.duracao_mensal_patamares)
@@ -186,7 +199,6 @@ class Transforma3DP:
             f.writelines(filtered_lines)
 
         print(f"Filtered file saved as {output_file}")
-
 
 
 
