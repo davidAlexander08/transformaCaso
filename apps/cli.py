@@ -39,7 +39,7 @@ def prospectivo(arquivo_txt):
                 flag_prossegue = 0
 
 
-@click.command("3DP")
+@click.command("caso3DP")
 @click.argument(
     "arquivo_txt",
 )
@@ -68,4 +68,4 @@ def prospectivo(arquivo_txt):
                 flag_prossegue = 0
 
 cli.add_command(prospectivo)
-cli.add_command(3DP)
+cli.add_command(caso3DP)
