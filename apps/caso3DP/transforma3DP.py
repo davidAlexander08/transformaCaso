@@ -189,7 +189,7 @@ class Transforma3DP:
             
             # Check if the line contains a year and if it's greater than 2020
             if len(parts) >= 3 and parts[2].isdigit():  
-                print(parts)
+                #print(parts)
                 year = int(parts[2])
                 if year > timeTableFinalEstudoBase.year:
                     continue  # Skip lines where the year is greater than 2020
