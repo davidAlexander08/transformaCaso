@@ -45,6 +45,7 @@ def caso3DP():
     warnings.filterwarnings('ignore')
     from apps.caso3DP.transforma3DP import Transforma3DP
     print("--------- Realizando Transformação do caso em reduzido 3DP---------------")
+    caminho = os.getcwd()
     Transforma3DP(caminho)
 
 cli.add_command(prospectivo)
