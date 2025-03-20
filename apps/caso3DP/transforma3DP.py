@@ -141,6 +141,10 @@ class Transforma3DP:
         print(dados_sistema.limites_intercambio)
         print(dados_sistema.mercado_energia)
         print(dados_sistema.geracao_usinas_nao_simuladas)
+        conteudo = StringIO()
+        dados_sistema.write(conteudo)
+        with open(self.caminhoDeckResultante+"/"+"sistema.dat", "w") as file:
+            file.write(conteudo.getvalue())
 
 
 
