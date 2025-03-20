@@ -18,6 +18,7 @@ from inewave.newave import Exph
 from inewave.newave import Expt
 from inewave.newave import Ghmin
 from inewave.newave import Manutt
+from inewave.newave import Confhd
 from inewave.newave import Modif
 from inewave.newave import Patamar
 from inewave.newave import Ree
@@ -49,97 +50,73 @@ class Transforma3DP:
         #print(self.dados_Dger_base.mes_inicio_estudo)    
         #print(self.dados_Dger_base.ano_inicio_estudo)    
         #self.timeTableInicioEstudoBase =  pd.to_datetime(str(self.dados_Dger_base.ano_inicio_estudo)+"-"+str(self.dados_Dger_base.mes_inicio_estudo)+"-01")
+
+        usinasRemanescentes = [
+            6,
+   8,
+  11,
+  12,
+  17,
+  18,
+  34,
+  66,
+ 156,
+ 227,
+ 229,
+ 251,
+ 257,
+ 261,
+ 285,
+ 287,
+ 279,
+  24,
+  25,
+  31,
+  32,
+  33,
+  37,
+  40,
+  42,
+  43,
+  45,
+  46,
+  47,
+  49,
+  50,
+  61,
+  62,
+  63,
+  74,
+  86,
+  91,
+  92,
+  93,
+ 103,
+ 115,
+  76,
+  77,
+  82,
+ 169,
+ 172,
+ 178,
+ 295,
+ 267,
+ 275,
+ 291,
+ 292,
+ 302,
+ 303,
+ 306,
+ 314,
+ 288]
+        self.retiraUsinas()
+
+
+
+    def retiraUsinas(self): 
+        dados = Confhd.read(self.caminhoDeckBase+"/confhd.dat").cadastro
+        print(dados)
         exit(1)
-        print(self.delta)
-        print(self.timeTableInicioEstudoProspectivo)
-        print(self.timeTableInicioEstudoBase)
-        self.transformaDger()
-        #self.transformaAgrint()
-        
-        self.transformaCadic()
-        self.transformaCasoDat()
-        self.transformaClast()
-        self.transformaCurva()
-        self.transformaVolumesReferencia()
-        self.transformaCVAR()
-        self.transformaRestricoesEletricas()
-        #self.transformaRestricoes()
-        self.transformaRee()
-        self.transformaVazpast()
-        self.transformaSistema()
-        #self.transformaDsvagua()
-        self.transformaExph()
-        self.transformaExpt()
-        self.transformaGhmin()
-        self.transformaManutt()
-        #self.transformaModif()
-        self.transformaPatamar()
-
-    def transformaRestricoesEletricas(self): 
-        with open(self.caminhoDeckBase+"/restricao-eletrica.csv", 'r') as file:
-            lines = file.readlines()  # Read all lines into a list
-
-        for i, line in enumerate(lines):
-            if (not line.beginswith("&") ):
-                if("RE-HORIZ-PER" in line):
-                    print(line)
-                if("RE-LIM-FORM-PER-PAT" in line):
-                    print(line)
-                #modified_line = line.replace(str(self.dados_Dger_base.ano_inicio_estudo), str(self.ano_inicio))
-                #lines[i] = modified_line  # Update the line in the list
-                #break  # Assuming you only want to modify the first matching line
-        exit(1)
-        # Write the modified content back to the file
-        #with open(self.caminhoDeckResultante+"/vazpast.dat", "w") as file:
-        #    file.writelines(lines)  # Write all lines (modified and unmodified) back to the file
-
-        RestricoesEletricas = pd.read_csv(self.caminhoDeckBase+"/restricao-eletrica.csv", delimiter=';', header=None, 
-                 skiprows=lambda x: self.skip_rows_conditionally(x.split(';')[0]))
-        print(RestricoesEletricas)
-        exit(1)
-        #CadHVolRefPer[2] = CadHVolRefPer[2] +self.delta
-        #CadHVolRefPer[3] = CadHVolRefPer[3] +self.delta
-        #CadHVolRefPer[2] = pd.to_datetime(CadHVolRefPer[2]).dt.strftime('%Y/%m')
-        #CadHVolRefPer[3] = pd.to_datetime(CadHVolRefPer[3]).dt.strftime('%Y/%m')
-        #print(CadHVolRefPer)
-#
-        #VolumeReferencialTipoPadrao.to_csv(self.caminhoDeckResultante+'/restricao-eletrica_teste.csv', index=False, header=False)
-        #CadHVolRefPer.to_csv(self.caminhoDeckResultante+'/restricao-eletrica_teste.csv', mode='a', index=False, header=False)
-
-
-
-    def transformaVolumesReferencia(self): 
-        VolumeReferencialTipoPadrao = pd.read_csv(self.caminhoDeckBase + "/volumes-referencia.csv", delimiter=';', nrows=1, header=None)
-        print(VolumeReferencialTipoPadrao)
-        CadHVolRefPer = pd.read_csv(self.caminhoDeckBase+"/volumes-referencia.csv", delimiter=';', skiprows=1, header=None, parse_dates=[2, 3])
-        CadHVolRefPer[2] = CadHVolRefPer[2] +self.delta
-        CadHVolRefPer[3] = CadHVolRefPer[3] +self.delta
-        CadHVolRefPer[2] = pd.to_datetime(CadHVolRefPer[2]).dt.strftime('%Y/%m')
-        CadHVolRefPer[3] = pd.to_datetime(CadHVolRefPer[3]).dt.strftime('%Y/%m')
-        print(CadHVolRefPer)
-
-        VolumeReferencialTipoPadrao.to_csv(self.caminhoDeckResultante+'/volumes-referencia.csv', index=False, header=False)
-        CadHVolRefPer.to_csv(self.caminhoDeckResultante+'/volumes-referencia.csv', mode='a', index=False, header=False)
-
-
-
-
-    def transformaVazpast(self): 
-        with open(self.caminhoDeckBase+"/vazpast.dat", "r") as file:
-            lines = file.readlines()  # Read all lines into a list
-
-        for i, line in enumerate(lines):
-            if "ANOPLAN" in line:
-                modified_line = line.replace(str(self.dados_Dger_base.ano_inicio_estudo), str(self.ano_inicio))
-                lines[i] = modified_line  # Update the line in the list
-                break  # Assuming you only want to modify the first matching line
-
-        # Write the modified content back to the file
-        with open(self.caminhoDeckResultante+"/vazpast.dat", "w") as file:
-            file.writelines(lines)  # Write all lines (modified and unmodified) back to the file
-
-    def transformaSistema(self): 
-        dados = Sistema.read(self.caminhoDeckBase+"/sistema.dat")
         dados.limites_intercambio["data"] = dados.limites_intercambio["data"] +self.delta + timedelta(days=1)
         df_temp = dados.mercado_energia.loc[(dados.mercado_energia["data"] <  datetime(9990, 1, 1))]
         df_temp["data"] = df_temp["data"] + self.delta  + timedelta(days=1)
