@@ -172,6 +172,7 @@ class Transforma3DP:
         filtered_lines = []
         for line in lines:
             parts = line.split()
+            print(parts)
             # Check if the line contains a year and if it's greater than 2020
             if len(parts) >= 3 and parts[-2].isdigit():  
                 year = int(parts[-2])
