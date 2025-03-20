@@ -151,11 +151,11 @@ class Transforma3DP:
         print(dados_pat.duracao_mensal_patamares)
         print(dados_pat.carga_patamares)
         print(dados_pat.intercambio_patamares)
-        print(dados_pat.usinas_nao_simuladas)
+        #print(dados_pat.usinas_nao_simuladas)
         dados_pat.duracao_mensal_patamares = dados_pat.duracao_mensal_patamares.loc[(dados_pat.duracao_mensal_patamares["data"] <= timeTableFinalEstudoBase)].reset_index(drop = True)
         dados_pat.carga_patamares = dados_pat.carga_patamares.loc[(dados_pat.carga_patamares["data"] <= timeTableFinalEstudoBase)].reset_index(drop = True)
         dados_pat.intercambio_patamares = dados_pat.intercambio_patamares.loc[(dados_pat.intercambio_patamares["data"] <= timeTableFinalEstudoBase)].reset_index(drop = True)
-        dados_pat.usinas_nao_simuladas = dados_pat.usinas_nao_simuladas.loc[(dados_pat.usinas_nao_simuladas["data"] <= timeTableFinalEstudoBase)].reset_index(drop = True)
+        #dados_pat.usinas_nao_simuladas = dados_pat.usinas_nao_simuladas.loc[(dados_pat.usinas_nao_simuladas["data"] <= timeTableFinalEstudoBase)].reset_index(drop = True)
 
         conteudo = StringIO()
         dados_pat.write(conteudo)
