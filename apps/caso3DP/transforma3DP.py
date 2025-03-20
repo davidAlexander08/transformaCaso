@@ -24,6 +24,7 @@ from inewave.newave import Patamar
 from inewave.newave import Ree
 from inewave.newave import Sistema
 from inewave.newave import Vazpast
+from inewave.newave import Re
 from inewave.libs import Restricoes
 import shutil
 from io import StringIO
@@ -117,10 +118,13 @@ class Transforma3DP:
         dados_confhd = Confhd.read(self.caminhoDeckBase+"/confhd.dat")
         dados_dsvagua = Dsvagua.read(self.caminhoDeckBase+"/dsvagua.dat")
         dados_exph = Exph.read(self.caminhoDeckBase+"/exph.dat")
+        dados_re = Re.read(self.caminhoDeckBase+"/re.dat")
 
         print(dados_dsvagua.desvios)
         print(dados_confhd.usinas)
-        
+        print(dados_re.usinas_conjuntos)
+        print(dados_re.restricoes)
+        exit(1)
 
         dados_confhd.usinas = dados_confhd.usinas.loc[(dados_confhd.usinas["codigo_usina"].isin(self.usinasRemanescentes))].reset_index(drop = True)
         dados_dsvagua.desvios = dados_dsvagua.desvios.loc[(dados_dsvagua.desvios["codigo_usina"].isin(self.usinasRemanescentes))].reset_index(drop = True)
