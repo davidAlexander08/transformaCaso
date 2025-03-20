@@ -134,7 +134,6 @@ class Transforma3DP:
             with open(self.caminhoDeckResultante+"/"+"re.dat", "w") as file:
                 file.write(conteudo.getvalue())
 
-        exit(1)
 
         dados_confhd.usinas = dados_confhd.usinas.loc[(dados_confhd.usinas["codigo_usina"].isin(self.usinasRemanescentes))].reset_index(drop = True)
         dados_dsvagua.desvios = dados_dsvagua.desvios.loc[(dados_dsvagua.desvios["codigo_usina"].isin(self.usinasRemanescentes))].reset_index(drop = True)
