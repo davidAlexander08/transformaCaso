@@ -116,7 +116,8 @@ class Transforma3DP:
     def retiraUsinas(self): 
         dados = Confhd.read(self.caminhoDeckBase+"/confhd.dat").usinas
         dados = dados.loc[(dados["codigo_usina"].isin(self.usinasRemanescentes))].reset_index(drop = True)
-
+        dados_dsvagua = Dsvagua.read(self.caminhoDeckBase+"/dsvagua.dat").desvios
+        print(dados_dsvagua)
 
         print(dados)
         exit(1)
