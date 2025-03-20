@@ -51,7 +51,7 @@ class Transforma3DP:
         #print(self.dados_Dger_base.ano_inicio_estudo)    
         #self.timeTableInicioEstudoBase =  pd.to_datetime(str(self.dados_Dger_base.ano_inicio_estudo)+"-"+str(self.dados_Dger_base.mes_inicio_estudo)+"-01")
 
-        usinasRemanescentes = [
+        self.usinasRemanescentes = [
             6,
    8,
   11,
@@ -115,8 +115,8 @@ class Transforma3DP:
 
     def retiraUsinas(self): 
         dados = Confhd.read(self.caminhoDeckBase+"/confhd.dat").usinas
-        dados = dados.loc[(dados["codigo_usina"].isin(usinasRemanescentes))].reset_index(drop = True)
-        
+        dados = dados.loc[(dados["codigo_usina"].isin(self.usinasRemanescentes))].reset_index(drop = True)
+
 
         print(dados)
         exit(1)
