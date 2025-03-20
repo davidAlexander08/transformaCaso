@@ -128,7 +128,7 @@ class Transforma3DP:
         print(dados_dsvagua.desvios)
         print(dados_confhd.usinas)
 
-        rees_remanescentes = dados_confhd["ree"].unique()
+        rees_remanescentes = dados_confhd.usinas["ree"].unique()
         print(rees_remanescentes)
         exit(1)
 
