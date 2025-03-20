@@ -4,6 +4,7 @@ from datetime import datetime, timedelta
 from calendar import monthrange
 import numpy as np
 import pandas as pd
+import re
 from apps.utils.log import Log
 import os.path
 from inewave.newave import Dger
@@ -48,11 +49,6 @@ class Transforma3DP:
             #shutil.rmtree(self.caminho_teste_1)
             #shutil.copytree(self.caminho, self.caminho_teste_1)
             print("DIRETORIO DO DECK PROSPECTIVO JÁ EXISTE, UTILIZANDO O DIRETORIO EXISTENTE")
-        self.dados_Dger_base = Dger.read(self.caminhoDeckBase+"/dger.dat")    
-        #print(self.dados_Dger_base.mes_inicio_estudo)    
-        #print(self.dados_Dger_base.ano_inicio_estudo)    
-        #self.timeTableInicioEstudoBase =  pd.to_datetime(str(self.dados_Dger_base.ano_inicio_estudo)+"-"+str(self.dados_Dger_base.mes_inicio_estudo)+"-01")
-
         self.usinasRemanescentes = [
             6,
    8,
@@ -112,8 +108,37 @@ class Transforma3DP:
  314,
  288]
         self.retiraUsinas()
+        self.alteraHorizonte()
 
 
+    def alteraHorizonte(self):
+
+        input_file = self.caminhoDeckResultante+"/"+"dger.dat"
+        output_file = self.caminhoDeckResultante+"/"+"dger_modified.dat"
+
+        # Dictionary mapping old values to new values
+        changes = {
+            r"(No\. DE ANOS DO EST\s+)(\d+)": r"\g<1>1",
+            r"(No\. DE ANOS POS\s+)(\d+)": r"\g<1>0",
+            r"(No\. MAX\. DE ITER\.\s+)(\d+)": r"\g<1>10",
+            r"(No DE SIM\. FORWARD\s+)(\d+)": r"\g<1>50",
+            r"(No DE ABERTURAS\s+)(\d+)": r"\g<1>5",
+            r"(No DE SERIES SINT\.\s+)(\d+)": r"\g<1>100",
+        }
+
+        # Read the file
+        with open(input_file, "r", encoding="utf-8") as f:
+            content = f.read()
+
+        # Apply replacements
+        for pattern, replacement in changes.items():
+            content = re.sub(pattern, replacement, content)
+
+        # Save the modified content
+        with open(output_file, "w", encoding="utf-8") as f:
+            f.write(content)
+
+        print(f"Modified file saved as {output_file}")
 
     def retiraUsinas(self): 
         dados_confhd = Confhd.read(self.caminhoDeckBase+"/confhd.dat")
@@ -182,26 +207,6 @@ class Transforma3DP:
             # Write the cleaned lines back to a new file
             with open(input_file, "w", encoding="utf-8") as f:
                 f.writelines(clean_lines)
-
-
-    #def transformaRestricoes(self):
-    #    dados = Restricoes.read(self.caminhoDeckBase+"/restricao-eletrica.csv")
-    #    print(dados.re_horiz_per(df = True))
-    #    print(dados.re_lim_form_per(df = True))
-    #    dados.re_horiz_per(df = True)["data_inicio"] = dados.re_horiz_per(df = True)["data_inicio"] + self.delta
-    #    dados.re_lim_form_per(df = True)["data_inicio"] = dados.re_lim_form_per(df = True)["data_inicio"] + self.delta
-    #    dados.re_horiz_per(df = True)["data_fim"] = dados.re_horiz_per(df = True)["data_fim"] + self.delta
-    #    dados.re_lim_form_per(df = True)["data_fim"] = dados.re_lim_form_per(df = True)["data_fim"] + self.delta
-    #    print(dados.re_horiz_per(df = True))
-    #    print(dados.re_lim_form_per(df = True))
-        
-        
-
-        #dados.rees["ano_fim_individualizado"] = dados.rees["ano_fim_individualizado"] + self.delta.days / 365
-        #conteudo = StringIO()
-        #dados.write(conteudo)
-        #with open(self.caminhoDeckResultante+"/"+"ree.dat", "w") as file:
-        #    file.write(conteudo.getvalue())
 
     def transformaRee(self): 
         dados = Ree.read(self.caminhoDeckBase+"/ree.dat")
