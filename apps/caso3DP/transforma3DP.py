@@ -108,10 +108,24 @@ class Transforma3DP:
  314,
  288]
         self.retiraUsinas()
+        self.transformaDgerUTF8()
         self.alteraHorizonte()
 
-
     def alteraHorizonte(self):
+        dados_Dger = Dger.read(self.caminhoDeckBase+"/dger.dat")
+        dados_Dger.num_anos_estudo = 1
+        dados_Dger.num_anos_pos_estudo = 0
+
+        conteudo_dger = StringIO()
+        dados_Dger.write(conteudo_dger)
+        with open(self.caminhoDeckResultante+"/"+"dger.dat", "w") as file:
+            file.write(conteudo_dger.getvalue())
+        #dados_Dger.ano_inicio_estudo
+
+
+
+
+    def transformaDgerUTF8(self):
 
         input_file = "dger.dat"
         output_file = "dger_utf8.dat"
